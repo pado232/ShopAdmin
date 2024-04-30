@@ -1,0 +1,22 @@
+.CreateSomething {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  width: 800px;
+  border: 1px solid #7e7e7e;
+  background-color: #ffdddd;
+}
+.CreateSomething .create {
+  display: flex;
+}
+.CreateSomething .create .input {
+  text-align: center;
+}
+.CreateSomething .create .input input {
+  width: 500px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.CreateSomething .create .button {
+  margin-left: 30px;
+}

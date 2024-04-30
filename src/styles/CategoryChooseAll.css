@@ -1,0 +1,16 @@
+.CategoryChooseAll {
+}
+.CategoryChooseAll select {
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.CategoryChooseAll optgroup {
+  font-weight: bold;
+}
+
+.CategoryChooseAll option {
+  padding: 5px 0;
+}

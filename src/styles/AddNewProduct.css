@@ -1,0 +1,40 @@
+.AddNewProduct {
+}
+.AddNewProduct h2 {
+  text-align: center;
+}
+.AddNewProduct table {
+  width: 100%;
+  min-width: 1300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  table-layout: fixed; /* 테이블 너비를 고정 */
+}
+
+.AddNewProduct th,
+.AddNewProduct td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background-color: #f2f2f2;
+}
+.AddNewProduct select,
+.AddNewProduct input,
+.AddNewProduct textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.AddNewProduct textarea {
+  resize: none;
+}
+.AddNewProduct .button {
+  margin: 20px 50px;
+  text-align: end;
+}

@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+.App {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+button {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+input {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+select {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+div {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+textarea {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 15px;
+}
+h2 {
+  font-size: 24px;
+}
+span {
+  font-size: 15px;
+}

@@ -1,0 +1,23 @@
+.CreateSubCategory {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  width: 800px;
+  border: 1px solid #ddd;
+  border-top: none;
+  background-color: #f3f3f3;
+}
+.CreateSubCategory .create {
+  display: flex;
+}
+.CreateSubCategory .create .input {
+  text-align: center;
+}
+.CreateSubCategory .create .input input {
+  width: 500px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.CreateSubCategory .create .button {
+  margin-left: 30px;
+}

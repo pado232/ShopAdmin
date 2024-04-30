@@ -1,0 +1,17 @@
+.MyButton button {
+  min-width: 120px;
+  min-height: 38px;
+
+  padding: 10px 20px;
+
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  background-color: white;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+.MyButton button:active {
+  box-shadow: none;
+}

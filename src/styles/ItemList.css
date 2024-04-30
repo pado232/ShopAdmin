@@ -1,0 +1,89 @@
+.ItemList {
+}
+.ItemList .select_box {
+  display: flex;
+  width: 100%;
+  min-width: 1300px;
+}
+.ItemList .select_box > div {
+  display: flex;
+  padding: 10px;
+}
+.ItemList .select_box .select_sort {
+  width: 10%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ItemList .select_box .select_category {
+  width: 10%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ItemList .select_box .select_delete {
+  width: 10%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ItemList .select_box .search {
+  width: 80%;
+  padding-right: 30px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ItemList select {
+  width: 120px;
+  padding: 7px 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.ItemList option {
+  padding: 5px 0;
+}
+.ItemList .search input {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.ItemList .search button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #e4e4e4;
+}
+.ItemList table {
+  width: 100%;
+  min-width: 1300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.ItemList th,
+.ItemList td {
+  padding: 5px 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.ItemList td {
+  padding: 0;
+}
+.ItemList table .btnbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ItemList table .btnbox > div {
+  padding: 10px;
+}
+.ItemList .pagination {
+  min-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

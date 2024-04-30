@@ -1,0 +1,36 @@
+.EditSomething {
+}
+
+.EditSomething .edit .content {
+  display: flex;
+  width: 800px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background-color: #fff8f8;
+}
+
+.EditSomething .edit .contentbox {
+  width: 450px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.EditSomething .edit .contentbox input {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid rgb(116, 116, 116);
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+}
+.EditSomething .edit .buttonbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.EditSomething p {
+  margin: 0;
+  font-size: 15px;
+}
+.EditSomething .edit .button {
+  margin-left: 30px;
+}

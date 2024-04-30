@@ -1,0 +1,23 @@
+.Pagination {
+}
+.Pagination ul {
+  margin: 10px auto;
+  padding: 0;
+  display: flex;
+}
+
+.Pagination li {
+  list-style-type: none;
+  padding: 20px;
+
+  color: rgb(153, 153, 153);
+  cursor: pointer;
+  font-size: 18px;
+}
+.Pagination li:hover {
+  text-decoration: underline;
+}
+.Pagination .arrowIcon {
+  width: 60px;
+  color: black;
+}

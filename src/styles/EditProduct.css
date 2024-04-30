@@ -1,0 +1,110 @@
+.EditProduct {
+}
+.EditProduct h2 {
+  text-align: center;
+}
+.EditProduct table {
+  width: 100%;
+  min-width: 1300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  table-layout: fixed; /* 테이블 너비를 고정 */
+}
+.EditProduct table.sub {
+  min-width: 600px;
+}
+.EditProduct table.sub th {
+  border-right: 1px solid #ddd;
+  background-color: #fcfcfc;
+}
+.EditProduct td {
+  padding: 10px;
+  text-align: start;
+  border-bottom: 1px solid #ddd;
+}
+.EditProduct th {
+  text-align: center;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+}
+.EditProduct select,
+.EditProduct input,
+.EditProduct textarea {
+  width: 450px;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.EditProduct textarea {
+  width: 100%;
+  resize: none;
+  height: 150px;
+}
+
+.EditProduct .sell_state {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.EditProduct .sell_state .state {
+  width: 200px;
+}
+
+.EditProduct .main_images {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.EditProduct .main_images .main_part {
+  text-align: center;
+  padding: 0 20px;
+}
+.EditProduct .main_images img {
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+}
+.EditProduct .sub_images {
+  max-width: 1000px;
+
+  width: 100%;
+  margin: 0 auto;
+}
+.EditProduct .sub_images img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.EditProduct .sub_part {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.EditProduct .delete,
+.EditProduct .add {
+  margin: 10px 20px;
+}
+
+.EditProduct .img_edit_btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.EditProduct .img_edit_btn .btn {
+  margin: 5px;
+}
+.EditProduct .stored {
+  min-width: 1300px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.EditProduct .stored .btn {
+  margin: 20px;
+}

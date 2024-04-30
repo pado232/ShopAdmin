@@ -1,0 +1,37 @@
+.EditSubCategory {
+}
+
+.EditSubCategory .edit .content {
+  display: flex;
+  width: 800px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-top: none;
+  background-color: #f3f3f3;
+}
+
+.EditSubCategory .edit .contentbox {
+  width: 450px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.EditSubCategory .edit .contentbox input {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid rgb(116, 116, 116);
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+}
+.EditSubCategory .edit .buttonbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.EditSubCategory p {
+  margin: 0;
+  font-size: 15px;
+}
+.EditSubCategory .edit .button {
+  margin-left: 30px;
+}

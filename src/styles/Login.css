@@ -1,0 +1,31 @@
+header {
+  padding: 20px;
+  border-bottom: 1px solid black;
+}
+header h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Login .login_container {
+  margin: 50px auto;
+  width: 300px;
+  padding: 50px;
+  background-color: #f8f8f8;
+  border: 2px solid eee;
+  border-radius: 10px;
+}
+.logoin_warpper {
+  display: flex;
+}
+.logoin_warpper input {
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.button_warpper {
+  margin-top: 10px;
+  padding-left: 80px;
+}

@@ -1,0 +1,37 @@
+.ImgAddMain {
+  text-align: center;
+}
+.img_select_box {
+  padding: 20px;
+  width: 250px;
+  height: 250px;
+  /* border: 1px solid #eee; */
+}
+.ImgAddMain label {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #f7f7f7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  background-color: white;
+  font-size: 15px;
+}
+.ImgAddMain label:active {
+  box-shadow: none;
+}
+.ImgAddMain input {
+  display: none;
+}
+.ImgAddMain img {
+  height: 150px;
+  width: 150px;
+}
+.ImgAddMain .unselect_img {
+  background-color: #f7f7f7;
+  width: 100%;
+  padding: 49px 0px;
+  color: gray;
+}
+.ImgAddMain .unselect_img div {
+  padding: 3px 0;
+}
