@@ -3,8 +3,10 @@ import MyButton from "../components/MyButton";
 import "../styles/EditSomething.css";
 import CreateSubCategory from "./CreateSubCategory.js";
 import EditSubCategory from "./EditSubCategory.js";
+import useCookies from "../util/Cookies.js";
 
 const EditSomething = ({ fetchCategories, getData }) => {
+  const { getCookie} = useCookies(); // useCookies 훅 사용
   const [editToggle, setEditToggle] = useState({});
   const [editCategory, setEditCategory] = useState({
     name: "",
@@ -33,6 +35,8 @@ const EditSomething = ({ fetchCategories, getData }) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json;",
+        "Authorization": `${getCookie("AuthorCookie")}`,
+        "Refresh_Token": `${getCookie("RefCookie")}`,
       },
       body: JSON.stringify({
         categoryId: editCategory.categoryId,

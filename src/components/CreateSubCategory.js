@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import MyButton from "./MyButton";
 import "../styles/CreateSubCategory.css";
+import useCookies from "../util/Cookies";
 
 const CreateSubCategory = ({ fetchCategories, parentId }) => {
+  const { getCookie} = useCookies(); // useCookies 훅 사용
   const inputRef = useRef();
   const [subCategory, setSubCategory] = useState({
     parentId: 0,
@@ -30,6 +32,8 @@ const CreateSubCategory = ({ fetchCategories, parentId }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json;",
+        "Authorization": `${getCookie("AuthorCookie")}`,
+        "Refresh_Token": `${getCookie("RefCookie")}`,
       },
       body: JSON.stringify({
         name: subCategory.main,

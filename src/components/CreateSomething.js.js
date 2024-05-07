@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import MyButton from "../components/MyButton";
 import "../styles/CreateSomething.css";
+import useCookies from "../util/Cookies";
 
 const CreateSomething = ({ fetchCategories }) => {
+  const {getCookie} = useCookies(); // useCookies 훅 사용
   const inputRef = useRef();
   const [mainCategory, setMainCategory] = useState({
     main: "",
@@ -26,6 +28,8 @@ const CreateSomething = ({ fetchCategories }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json;",
+        "Authorization": `${getCookie("AuthorCookie")}`,
+        "Refresh_Token": `${getCookie("RefCookie")}`,
       },
       body: JSON.stringify({
         name: mainCategory.main,

@@ -1,6 +1,10 @@
 import "../styles/Header.css";
 
-const Header = () => {
+const Header = ({isLoggedIn, onLogout}) => {
+
+const handleToggle = ()=>{
+  onLogout();
+}
   return (
     <header className="Header">
       <div className="home">
@@ -11,7 +15,8 @@ const Header = () => {
       </div>
 
       <div className="login">
-        <a href="/login">LOGIN</a>
+        {isLoggedIn ? <a href="/" onClick={handleToggle}>LOGOUT</a>:<a href="/login">LOGIN</a>}
+        
       </div>
     </header>
   );
