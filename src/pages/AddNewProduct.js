@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import axiosInstance from "../api/AxiosInstance";
 
 import "../styles/Header.css";
 import "../styles/Menu.css";
@@ -116,16 +117,14 @@ const AddNewProduct = () => {
       formData.append("mainImgList", item.main_img[i]);
     }
     for (let i = 0; i < item.sub_img.length; i++) {
-      formData.append("serveImgList", item.sub_img[i]);
+      formData.append("subImgList", item.sub_img[i]);
     }
 
     // ❗❗❕❗❗❕아직 이미지 안넣은 상태입니다.
-    fetch("http://localhost:8080/admin/item", {
-      method: "POST",
-      body: formData,
-    })
-      .then((data) => {
-        console.log("POST Success:", data);
+    axiosInstance
+      .post("http://localhost:8080/admin/item", formData) // fetch 대신 axios 사용
+      .then((response) => {
+        console.log("POST Success:", response.data);
       })
       .catch((error) => {
         console.error("Error:", error);

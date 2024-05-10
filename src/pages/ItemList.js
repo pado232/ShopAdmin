@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/AxiosInstance";
 
 import Container from "../components/Container";
 import Pagination from "../components/Pagination";
@@ -29,25 +30,20 @@ const ItemList = () => {
         categoryId: selectedCategoryId ? parseInt(selectedCategoryId) : "",
         itemName: searchTerm,
         delete: false,
-        // isDelete: deleteValue,
         nowPage,
       });
 
       console.log(queryParams.toString());
-      fetch(`http://localhost:8080/admin/itemList?${queryParams.toString()}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Failed to fetch item list");
-          }
-          return res.json();
-        })
-        .then((data) => {
+      axiosInstance
+        .get(`/admin/itemList/view?${queryParams.toString()}`) // axios로 변경
+        .then((response) => {
+          const data = response.data;
           setItemList(data.itemList);
           setTotalPage(data.totalPage);
           setNowPage(data.nowPage);
         })
         .catch((error) => {
-          console.error("Error fetching item list:", error);
+          console.error("Error:", error);
         });
     };
 
@@ -66,11 +62,10 @@ const ItemList = () => {
       `${itemName}(을)를 정말 삭제하시겠습니까?`
     );
     if (shouldDelete) {
-      fetch(`http://localhost:8080/admin/item?itemId=${itemId}`, {
-        method: "DELETE",
-      })
+      axiosInstance
+        .delete(`/admin/item?itemId=${itemId}`) // axios로 변경
         .then((response) => {
-          if (response.ok) {
+          if (response.status === 200) {
             setIsDelete(!isDelete); // Delete 후 상태 변경
             console.log("Item deleted successfully.");
           } else {

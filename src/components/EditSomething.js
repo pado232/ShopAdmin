@@ -1,12 +1,11 @@
 import { useState } from "react";
 import MyButton from "../components/MyButton";
 import "../styles/EditSomething.css";
-import CreateSubCategory from "./CreateSubCategory.js";
-import EditSubCategory from "./EditSubCategory.js";
-import useCookies from "../util/Cookies.js";
+import CreateSubCategory from "./CreateSubCategory";
+import EditSubCategory from "./EditSubCategory";
+import axiosInstance from "../api/AxiosInstance";
 
 const EditSomething = ({ fetchCategories, getData }) => {
-  const { getCookie} = useCookies(); // useCookies 훅 사용
   const [editToggle, setEditToggle] = useState({});
   const [editCategory, setEditCategory] = useState({
     name: "",
@@ -30,19 +29,11 @@ const EditSomething = ({ fetchCategories, getData }) => {
 
   const onUpdate = () => {
     setEditToggle(false);
-
-    fetch(`http://localhost:8080/admin/category`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json;",
-        "Authorization": `${getCookie("AuthorCookie")}`,
-        "Refresh_Token": `${getCookie("RefCookie")}`,
-      },
-      body: JSON.stringify({
+    axiosInstance
+      .patch(`/admin/category`, {
         categoryId: editCategory.categoryId,
         name: editCategory.name,
-      }),
-    })
+      })
       .then((data) => {
         console.log("Success:", data);
         fetchCategories();
@@ -71,11 +62,8 @@ const EditSomething = ({ fetchCategories, getData }) => {
 
   const deleteCategory = async (category) => {
     try {
-      await fetch(
-        `http://localhost:8080/admin/category?categoryId=${category.categoryId}`,
-        {
-          method: "DELETE",
-        }
+      await axiosInstance.delete(
+        `/admin/category?categoryId=${category.categoryId}`
       );
       console.log("Category deleted successfully:", category);
       fetchCategories();

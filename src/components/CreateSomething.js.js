@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import MyButton from "../components/MyButton";
 import "../styles/CreateSomething.css";
-import useCookies from "../util/Cookies";
+import axiosInstance from "../api/AxiosInstance";
 
 const CreateSomething = ({ fetchCategories }) => {
-  const {getCookie} = useCookies(); // useCookies 훅 사용
   const inputRef = useRef();
   const [mainCategory, setMainCategory] = useState({
     main: "",
@@ -24,19 +23,12 @@ const CreateSomething = ({ fetchCategories }) => {
       return;
     }
     console.log(mainCategory);
-    fetch("http://localhost:8080/admin/category", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;",
-        "Authorization": `${getCookie("AuthorCookie")}`,
-        "Refresh_Token": `${getCookie("RefCookie")}`,
-      },
-      body: JSON.stringify({
+    axiosInstance
+      .post(`/admin/category/view`, {
         name: mainCategory.main,
-      }),
-    })
-      .then((data) => {
-        console.log("POST Success:", data);
+      })
+      .then((response) => {
+        console.log("POST Success:", response);
         fetchCategories();
       })
       .catch((error) => {

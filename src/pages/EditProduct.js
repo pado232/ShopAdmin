@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import axiosInstance from "../api/AxiosInstance";
 import ImgRegistration from "../components/ImgRegisteration";
 import CategoryChoose from "../components/CategoryChoose";
 import Container from "../components/Container";
@@ -29,13 +31,10 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/admin/item/data?itemId=${itemId}`
+        const response = await axiosInstance.get(
+          `/admin/item/data?itemId=${itemId}`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch item details");
-        }
-        const itemData = await response.json();
+        const itemData = response.data;
 
         // input 값 초기화 해주기
         setInputValue({
@@ -48,10 +47,8 @@ const EditProduct = () => {
           sellPrice: itemData.sellPrice,
           stock: itemData.stock,
           sell: itemData.sell,
-          // main_img: itemData.main_img,
-          // sub_img: itemData.sub_img,
-          main_img: itemData.imgDataDataListResponse,
-          sub_img: itemData.serveImgDataResponseList,
+          main_img: itemData.mainImgDataList,
+          sub_img: itemData.subImgDataList,
         });
       } catch (error) {
         console.error("Error fetching item details:", error);
@@ -66,7 +63,7 @@ const EditProduct = () => {
 
     if (
       (name === "price" ||
-        name === "discontRate" ||
+        name === "discountRate" ||
         name === "sellPrice" ||
         name === "stock") &&
       isNaN(value)
@@ -91,6 +88,10 @@ const EditProduct = () => {
       ...prevItem,
       main_img: mainImage,
     }));
+  };
+
+  const handleSave = () => {
+    // 저장 로직 구현
   };
 
   return (
@@ -270,7 +271,7 @@ const EditProduct = () => {
             <MyButton buttonText={"취소"} onClick={() => navigate(-1)} />
           </div>
           <div className="btn">
-            <MyButton buttonText={"저장하기"} />
+            <MyButton buttonText={"저장하기"} onClick={handleSave} />
           </div>
         </div>
       </Container>

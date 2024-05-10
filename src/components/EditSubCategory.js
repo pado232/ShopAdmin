@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { getCookie } from "../util/Cookies";
 import MyButton from "../components/MyButton";
+import axiosInstance from "../api/AxiosInstance";
 import "../styles/EditSubCategory.css";
 
 const filterChildCategories = (categories, parentId) => {
@@ -34,19 +36,23 @@ const EditSubCategory = ({ fetchCategories, childCategories, parentId }) => {
     const editedCategory = categoryStates[index];
     setEditToggle(false);
 
-    fetch(`http://localhost:8080/admin/category`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json;",
-      },
-      body: JSON.stringify({
-        categoryId: editedCategory.categoryId,
-        name: editedCategory.name,
-        parentId: editedCategory.parentId,
-      }),
-    })
-      .then((data) => {
-        console.log("Success:", data);
+    axiosInstance
+      .patch(
+        `/admin/category`,
+        {
+          categoryId: editedCategory.categoryId,
+          name: editedCategory.name,
+          parentId: editedCategory.parentId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json;",
+            Authorization: `${getCookie("Authorization")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Success:", response);
         fetchCategories();
       })
       .catch((error) => {
@@ -63,14 +69,14 @@ const EditSubCategory = ({ fetchCategories, childCategories, parentId }) => {
     const categoryToDelete = filteredChildCategories[index];
     console.log("삭제 - categoryId 숫자 : ", categoryToDelete.categoryId);
 
-    fetch(
-      `http://localhost:8080/admin/category?categoryId=${categoryToDelete.categoryId}`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((data) => {
-        console.log("Success:", data);
+    axiosInstance
+      .delete(`/admin/category?categoryId=${categoryToDelete.categoryId}`, {
+        headers: {
+          Authorization: `${getCookie("Authorization")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Success:", response);
         fetchCategories();
       })
       .catch((error) => {

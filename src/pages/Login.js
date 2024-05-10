@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import MyButton from "../components/MyButton";
 import Container from "../components/Container";
-import useCookies from "../util/Cookies"; // 쿠키 관리 컴포넌트 가져오기
+import { setCookie } from "../util/Cookies";
+import axiosInstance from "../api/AxiosInstance";
 
-const Login = ({onLogin}) => {
+const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [state, setState] = useState({ id: "", pw: "" });
-  const { setCookie } = useCookies(); // useCookies 훅 사용
 
   const handleChangeState = (e) => {
     const { name, value } = e.target;
@@ -17,49 +19,35 @@ const Login = ({onLogin}) => {
     });
   };
 
-  const handleSubmit = () => {
-    // < 관리자 정보 >
-    // 아이디: admin111
-    // 패스워드: Password@1
-
-    // 로그인 처리
-    fetch("http://localhost:8080/adminLogin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+  const handleSubmit = async () => {
+    try {
+      const response = await axiosInstance.post("/adminLogin", {
+        // axiosInstance 사용
         loginId: state.id,
-        loginPassword: state.pw
-      }),
-    })
-    .then((response) => {
-      // console.log('서버 응답 확인하기: ',response);
-      if (!response.ok) {
-        throw new Error("로그인 실패");
-      }
+        loginPassword: state.pw,
+      });
+
       // 서버로부터 받은 토큰
-      const AuthorizationToken = response.headers.get('Authorization');   // 시간이 지나면 바뀌는 토큰
-      const RefreshToken = response.headers.get('Refresh_Token');    // 바뀐 AuthorizationToken을 위해 인증하는 토큰
+      const AuthorizationToken = response.headers.get("Authorization");
+      const RefreshToken = response.headers.get("Refresh_Token");
 
       // 토큰을 쿠키에 저장
-      setCookie('AuthorCookie', AuthorizationToken);
-      setCookie('RefCookie', RefreshToken);
+      setCookie("Authorization", AuthorizationToken);
+      setCookie("Refresh_Token", RefreshToken);
 
       // 로그인 성공 시 부모 컴포넌트로 토큰 전달
-      onLogin(AuthorizationToken);
+      onLogin(AuthorizationToken, RefreshToken);
 
       // 로그인 성공 알림
+      setState({ id: "", pw: "" });
       alert("로그인이 완료되었습니다.");
-         // navigate("/");
-    })
-    .catch((error) => {
+
+      navigate(-1);
+    } catch (error) {
       console.error("로그인 에러:", error);
       alert("유효하지 않은 회원정보입니다. 다시 입력해주세요.");
       setState({ id: "", pw: "" });
-    });
-
-      // setState({ id: "", pw: "" });
+    }
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axiosInstance from "../api/AxiosInstance"; // axios 임포트
 import "../styles/CategoryChooseAll.css";
 
 const CategoryChooseAll = ({ selectedCategoryId, setSelectedCategoryId }) => {
@@ -7,14 +8,10 @@ const CategoryChooseAll = ({ selectedCategoryId, setSelectedCategoryId }) => {
   useEffect(() => {
     // 카테고리 목록을 가져오는 함수
     const fetchCategories = () => {
-      fetch("http://localhost:8080/admin/category")
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Failed to fetch categories");
-          }
-          return res.json();
-        })
-        .then((data) => {
+      axiosInstance
+        .get("/admin/category/view")
+        .then((response) => {
+          const data = response.data;
           const sortedData = [...data].sort(
             (a, b) => a.categoryId - b.categoryId
           );

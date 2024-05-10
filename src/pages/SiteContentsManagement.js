@@ -1,24 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import Container from "../components/Container";
+// import { refresh } from "../api/Refresh.js";
 import CreateSomething from "../components/CreateSomething.js";
 import EditSomething from "../components/EditSomething.js";
-import useCookies from "../util/Cookies.js";
+import axiosInstance from "../api/AxiosInstance.js";
 
 const SiteContentsManagement = () => {
-  const { getCookie} = useCookies(); // useCookies 훅 사용
   const [getData, setGetData] = useState(null);
 
   const fetchCategories = useCallback(() => {
-    fetch("http://localhost:8080/admin/category", {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `${getCookie("AuthorCookie")}`,
-        "Refresh_Token": `${getCookie("RefCookie")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // setGetData(data);
+    axiosInstance
+      .get("/admin/category/view")
+      .then((response) => {
+        const data = response.data;
 
         // categoryId의 값으로 정렬
         // 수정하면 가장 마지막으로 데이터베이스에 저장되는 문제를 해결하기 위해
@@ -32,7 +26,7 @@ const SiteContentsManagement = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  },[getCookie]);
+  }, []);
 
   useEffect(() => {
     fetchCategories();

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axiosInstance from "../api/AxiosInstance";
 
 const CategoryChoose = ({ item, setItem, selectRef }) => {
   const [categories, setCategories] = useState([]);
@@ -9,14 +10,10 @@ const CategoryChoose = ({ item, setItem, selectRef }) => {
   }, []);
 
   const fetchCategories = () => {
-    fetch("http://localhost:8080/admin/category")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch categories");
-        }
-        return res.json();
-      })
-      .then((data) => {
+    axiosInstance
+      .get("/admin/category/view")
+      .then((response) => {
+        const data = response.data;
         const sortedData = [...data].sort((a, b) => {
           return a.categoryId - b.categoryId;
         });

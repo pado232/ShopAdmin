@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import MyButton from "./MyButton";
 import "../styles/CreateSubCategory.css";
-import useCookies from "../util/Cookies";
+import axiosInstance from "../api/AxiosInstance";
 
 const CreateSubCategory = ({ fetchCategories, parentId }) => {
-  const { getCookie} = useCookies(); // useCookies 훅 사용
   const inputRef = useRef();
   const [subCategory, setSubCategory] = useState({
     parentId: 0,
@@ -27,21 +26,13 @@ const CreateSubCategory = ({ fetchCategories, parentId }) => {
       return;
     }
 
-    console.log(subCategory);
-    fetch("http://localhost:8080/admin/category", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;",
-        "Authorization": `${getCookie("AuthorCookie")}`,
-        "Refresh_Token": `${getCookie("RefCookie")}`,
-      },
-      body: JSON.stringify({
+    axiosInstance
+      .post(`/admin/category`, {
         name: subCategory.main,
         parentId: subCategory.parentId,
-      }),
-    })
-      .then((data) => {
-        console.log("POST Success:", data);
+      })
+      .then((response) => {
+        console.log("POST Success:", response);
         fetchCategories();
       })
       .catch((error) => {
