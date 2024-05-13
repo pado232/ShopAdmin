@@ -28,7 +28,7 @@ const ImgRegistration = ({ mainImgs, setMainImgs, handleImageChange }) => {
     const fileUrl = mainImgs[index] ? mainImgs[index].fileUrl : ""; // 이미지가 없는 경우 빈 문자열 전달
 
     // 각 이미지 선택 창이 렌더링될 때 콘솔 출력
-    console.log(`이미지 선택 창 렌더링 - index: ${index}, fileUrl: ${fileUrl}`);
+    // console.log(`이미지 선택 창 렌더링 - index: ${index}, fileUrl: ${fileUrl}`);
 
     return (
       <ImgAddMain
