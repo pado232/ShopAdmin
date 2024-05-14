@@ -132,7 +132,8 @@ const EditProductTableOne = () => {
   };
 
   return (
-    <div className="EditProduct">
+    <div>
+      <h3>상품 상세정보 수정하기</h3>
       {inputValue && (
         <table>
           <colgroup style={{ width: 200 }} />
