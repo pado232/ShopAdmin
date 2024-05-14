@@ -14,16 +14,18 @@ import ImgAddRegisteration from "../components/ImgAddRegisteration";
 const AddNewProduct = () => {
   const inputRef = useRef([]);
   const selectRef = useRef([]);
-  const [sellPrice, setSellPrice] = useState(0);
-  const [salePrice, setSalePrice] = useState(0);
+  // const [sellPrice, setSellPrice] = useState(0);
+  // const [salePrice, setSalePrice] = useState(0);
   const [item, setItem] = useState({
     category: "",
     subcategory: "",
     name: "",
     content: "",
-    sale: "",
-    price: "",
-    stock: "",
+    discountRate: "0",
+    discountPrice: "0",
+    sellPrice: "0",
+    price: "0",
+    stock: "0",
     main_img: [""],
     sub_img: [""],
   });
@@ -32,27 +34,56 @@ const AddNewProduct = () => {
     const { name, value } = e.target;
 
     if (
-      (name === "price" || name === "sale" || name === "stock") &&
-      isNaN(value)
+      (name === "price" ||
+        name === "discountRate" ||
+        name === "stock" ||
+        name === "sellPrice") &&
+      !/^\d*$/.test(value)
     ) {
-      // 입력값이 숫자가 아닌 경우 무시
       return;
     }
 
-    const processedValue =
-      name === "price" || name === "sale" || name === "stock"
-        ? parseInt(value, 10)
-        : value;
+    // 모든 숫자를 지우면 해당 필드에 0 표시
+    if (value.trim() === "") {
+      setItem((prevState) => ({
+        ...prevState,
+        [name]: "0",
+        discountRate: name === "price" ? "0" : prevState.discountRate,
+        discountPrice: name === "price" ? "0" : prevState.discountPrice,
+        sellPrice: name === "price" ? "0" : prevState.sellPrice,
+      }));
+      return;
+    }
 
-    setItem((prevItem) => {
-      const updatedItem = { ...prevItem, [name]: processedValue };
+    // 0으로 시작하는 숫자 입력 방지
+    if (value[0] === "0") {
+      setItem((prevState) => ({
+        ...prevState,
+        [name]: value.slice(1),
+      }));
+      return;
+    }
 
-      const calculatedSellPrice =
-        updatedItem.price - updatedItem.price * updatedItem.sale * 0.01;
-      const calculatedSalePrice = updatedItem.price - calculatedSellPrice;
-      setSellPrice(Math.floor(calculatedSellPrice));
-      setSalePrice(Math.floor(calculatedSalePrice));
-      return updatedItem;
+    setItem((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    setItem((prevState) => {
+      let updatedState = { ...prevState, [name]: value };
+      if (name === "discountRate" || name === "price") {
+        const price = parseFloat(name === "price" ? value : prevState.price);
+        const discountRate = parseFloat(
+          name === "discountRate" ? value : prevState.discountRate
+        );
+        const discountPrice = price * (discountRate / 100);
+        updatedState = {
+          ...updatedState,
+          discountPrice: Math.floor(discountPrice), // 할인가를 내림하여 표시
+          sellPrice: Math.floor(price - discountPrice), // 할인가를 원가에서 빼고 내림하여 할인가 계산
+        };
+      }
+      return updatedState;
     });
   };
 
@@ -90,7 +121,10 @@ const AddNewProduct = () => {
     }
 
     for (let i = 0; i < inputRef.current.length; i++) {
-      if (inputRef.current[i].value === "") {
+      if (
+        inputRef.current[i].value === "" ||
+        inputRef.current[i].value === "0"
+      ) {
         inputRef.current[i].focus();
         return;
       }
@@ -106,9 +140,9 @@ const AddNewProduct = () => {
     formData.append("name", item.name);
     formData.append("content", item.content);
     formData.append("price", item.price);
-    formData.append("discountRate", item.sale);
-    formData.append("discountPrice", salePrice);
-    formData.append("sellPrice", sellPrice);
+    formData.append("discountRate", item.discountRate);
+    formData.append("discountPrice", item.discountPrice);
+    formData.append("sellPrice", item.sellPrice);
     formData.append("stock", item.stock);
     formData.append("isSell", false);
 
@@ -120,32 +154,17 @@ const AddNewProduct = () => {
       formData.append("subImgList", item.sub_img[i]);
     }
 
-    // ❗❗❕❗❗❕아직 이미지 안넣은 상태입니다.
     axiosInstance
-      .post("http://localhost:8080/admin/item", formData) // fetch 대신 axios 사용
+      .post("/admin/item", formData)
       .then((response) => {
         console.log("POST Success:", response.data);
+
+        window.alert("상품이 성공적으로 등록되었습니다!");
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    console.log(item);
-    console.log("sellPrice :", sellPrice);
-    console.log("salePrice :", salePrice);
-    setItem({
-      category: "",
-      subcategory: "",
-      name: "",
-      content: "",
-      sale: "",
-      price: "",
-      stock: "",
-      main_img: [""],
-      sub_img: [""],
-    });
-    setSalePrice(0);
-    setSellPrice(0);
   };
 
   return (
@@ -157,7 +176,7 @@ const AddNewProduct = () => {
           <colgroup style={{ width: 1000 }} />
           <tbody>
             <tr>
-              <th>상품 이미지</th>
+              <th>상품 대표 이미지</th>
               <td>
                 <ImgRegistration
                   mainImgs={item.main_img}
@@ -205,16 +224,16 @@ const AddNewProduct = () => {
               <th>{`할인율(%)`}</th>
               <td>
                 <input
-                  name="sale"
-                  value={item.sale}
+                  name="discountRate"
+                  value={item.discountRate}
                   ref={(el) => (inputRef.current[2] = el)}
                   onChange={handleChangeState}
                 />
                 <p style={{ textAlign: "start" }}>
-                  {`(${item.sale}% : ${salePrice}원)`}
+                  {`(${item.discountRate}% : ${item.discountPrice}원)`}
                 </p>
                 <p style={{ textAlign: "start" }}>
-                  할인된 가격 : <strong>{sellPrice}</strong>원
+                  할인된 가격 : <strong>{item.sellPrice}</strong>원
                 </p>
               </td>
             </tr>
@@ -241,7 +260,7 @@ const AddNewProduct = () => {
               </td>
             </tr>
             <tr>
-              <th>상품상세 이미지</th>
+              <th>상품 상세 이미지</th>
               <td>
                 <ImgAddRegisteration
                   handleImageChange={handleSubImageNamesChange}

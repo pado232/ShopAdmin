@@ -53,14 +53,45 @@ const EditProductTableOne = () => {
 
   const ChangeInputValue = (e) => {
     const { name, value } = e.target;
-
+    // 숫자가 아닌 경우 입력 막기
     if (
-      (name === "price" || name === "discountRate" || name === "stock") &&
-      isNaN(value)
+      (name === "price" ||
+        name === "discountRate" ||
+        name === "stock" ||
+        name === "sellPrice") &&
+      !/^\d*$/.test(value)
     ) {
-      // 입력값이 숫자가 아닌 경우 무시
       return;
     }
+
+    // 모든 숫자를 지우면 해당 필드에 0 표시
+    if (value.trim() === "") {
+      setInputValue((prevState) => ({
+        ...prevState,
+        [name]: "0",
+
+        discountRate: name === "price" ? "0" : prevState.discountRate,
+        discountPrice: name === "price" ? "0" : prevState.discountPrice,
+        sellPrice: name === "price" ? "0" : prevState.sellPrice,
+      }));
+      return;
+    }
+
+    // 0으로 시작하는 숫자 입력 방지
+    if (value[0] === "0") {
+      setInputValue((prevState) => ({
+        ...prevState,
+        [name]: value.slice(1),
+      }));
+      return;
+    }
+
+    setInputValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // 0으로 시작하지 않는 경우에만 값 설정
 
     // if (name === "discountRate") {
     //   const price = parseFloat(inputValue.price);
@@ -123,12 +154,15 @@ const EditProductTableOne = () => {
         console.error("Error:", error);
       });
 
-    window.confirm("수정된 상세정보가 저장되었습니다.");
+    window.alert("작업이 저장되었습니다.");
     // 저장 로직 구현
   };
 
   const handleCancel = () => {
-    fetchItemDetails(); // 취소 버튼 클릭 시 서버에서 아이템 데이터를 다시 불러옴
+    if (window.confirm("작업이 취소됩니다.")) {
+      fetchItemDetails();
+    } else {
+    }
   };
 
   return (
@@ -199,9 +233,6 @@ const EditProductTableOne = () => {
                           onChange={ChangeInputValue}
                         />
                         %
-                        <div style={{ color: "red" }}>
-                          할인금액이 서버로부터 변동이되지 않고 들어오는 듯
-                        </div>
                         <div>{`(할인 금액: ${inputValue.discountPrice}원)`}</div>
                       </td>
                     </tr>

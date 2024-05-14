@@ -33,25 +33,6 @@ const ImgAddMain = ({ onImageSelect, imgTitle, initialImage }) => {
     // deleteImageFromServer();
   };
 
-  // const deleteImageFromServer = async (imageFile) => {
-  //   try {
-  //     await fetch(
-  //       `http://localhost:8080/admin/item/mainImg/deleteitemId=${itemId}&s3Filed=${s3Filed}`,
-  //       {
-  //         method: "DELETE",
-  //       }
-  //     );
-  //     console.log("imageFile deleted successfully:", imageFile);
-  //     fetchCategories();
-  //   } catch (error) {
-  //     console.error("Error deleting imageFile:", error);
-  //   }
-  // };
-
-  // const uploadImageToServer = () => {
-
-  // };
-
   return (
     <div className="ImgAddMain">
       <div className="img_select_box">

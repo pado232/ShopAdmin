@@ -17,7 +17,7 @@ const ItemList = () => {
   const [nowPage, setNowPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [deleteValue, setDeleteValue] = useState(false);
+  const [isSell, setIsSell] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
   const [itemSort, setItemSort] = useState("");
 
@@ -29,6 +29,7 @@ const ItemList = () => {
         itemSort: itemSort,
         categoryId: selectedCategoryId ? parseInt(selectedCategoryId) : "",
         itemName: searchTerm,
+        isSell: isSell,
         delete: false,
         nowPage,
       });
@@ -48,14 +49,7 @@ const ItemList = () => {
     };
 
     fetchItemList();
-  }, [
-    nowPage,
-    isDelete,
-    searchTerm,
-    selectedCategoryId,
-    itemSort,
-    deleteValue,
-  ]);
+  }, [nowPage, isDelete, searchTerm, selectedCategoryId, itemSort, isSell]);
 
   const handleDelete = (itemId, itemName) => {
     const shouldDelete = window.confirm(
@@ -109,18 +103,16 @@ const ItemList = () => {
           <div className="select_delete">
             <select
               name="delete"
-              value={deleteValue}
+              value={isSell}
               onChange={(e) => {
-                setDeleteValue(e.target.value);
-                console.log(deleteValue);
+                setIsSell(e.target.value);
+                console.log(isSell);
               }}
             >
-              <option value={false}>진열 상품</option>
-              <option value={true}>삭제 상품</option>
+              <option value={true}>진열 상품</option>
+              <option value={false}>삭제 상품</option>
             </select>
           </div>
-
-          <p style={{ color: "red" }}>진열상품 미완</p>
 
           <div className="search">
             <input
@@ -169,7 +161,7 @@ const ItemList = () => {
                   <td>{item.discountRate}%</td>
                   <td>{item.discountPrice}</td>
                   <td>{item.sellPrice}</td>
-                  <td>{item.isSell ? "판매 중" : "판매 중지"}</td>
+                  <td>{item.sell ? "판매 중" : "판매 중지"}</td>
                   <td>
                     <div className="btnbox">
                       <div>
