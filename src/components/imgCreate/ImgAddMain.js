@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../styles/ImgAddMain.css";
-import MyButton from "./MyButton";
+import "../../styles/ImgAddMain.css";
+import MyButton from "../MyButton";
 
 const ImgAddMain = ({ onImageSelect, imgTitle, initialImage }) => {
   const [imageURL, setImageURL] = useState("");

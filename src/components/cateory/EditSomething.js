@@ -1,9 +1,9 @@
 import { useState } from "react";
-import MyButton from "../components/MyButton";
-import "../styles/EditSomething.css";
+import MyButton from "../MyButton";
+import "../../styles/EditSomething.css";
 import CreateSubCategory from "./CreateSubCategory";
 import EditSubCategory from "./EditSubCategory";
-import axiosInstance from "../api/AxiosInstance";
+import axiosInstance from "../../api/AxiosInstance";
 
 const EditSomething = ({ fetchCategories, getData }) => {
   const [editToggle, setEditToggle] = useState({});

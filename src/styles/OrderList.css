@@ -1,0 +1,162 @@
+.OrderList {
+}
+.OrderList .select_box {
+  display: flex;
+  width: 100%;
+  min-width: 1300px;
+}
+.OrderList .select_box > div {
+  display: flex;
+  padding: 10px;
+}
+.OrderList .select_box .select_status {
+  width: 10%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.OrderList .select_box .radio {
+  width: 33%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.OrderList .select_box .search {
+  width: 70%;
+  padding-right: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.OrderList select {
+  width: 120px;
+  padding: 7px 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.OrderList option {
+  padding: 5px 0;
+}
+.OrderList .search input {
+  width: 200px;
+  margin-right: 15px;
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.OrderList .select_box button {
+  margin-right: 10px;
+  padding: 7px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #e4e4e4;
+}
+.OrderList .radio label {
+  margin-right: 10px;
+}
+.OrderList .radio input {
+  margin: 5px;
+}
+
+.OrderList table {
+  width: 100%;
+  min-width: 1300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+.OrderList th,
+.OrderList td {
+  padding: 5px 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.OrderList td {
+  padding: 0;
+}
+.OrderList td > div {
+  padding: 3px 0;
+}
+.OrderList .uncenter {
+  text-align: initial;
+  padding: 0 20px;
+}
+.OrderList .btnbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderList .btnbox > div {
+  padding: 10px;
+}
+.OrderList .pagination {
+  min-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderList .orderitem {
+  /* margin: 10px; */
+  padding: 10px 0;
+}
+
+.OrderList .orderitem > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.OrderList .orderitem .img {
+  padding: 10px;
+}
+.OrderList .orderitem .img img {
+  padding: 10px;
+  width: 90px;
+  height: 90px;
+}
+.OrderList .price > span {
+  padding-right: 5px;
+}
+.OrderList .item_box {
+  padding: 10px 0;
+  margin: 5px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+.OrderList .delivery > div {
+  margin: 5px 0;
+}
+.OrderList .delivery > div > .icon {
+  margin: 0 7px;
+}
+.OrderList .ordertime {
+  margin-left: 30px;
+}
+
+.OrderList .answer {
+  margin: 10px 20px;
+  padding: 20px;
+  border: 1px solid #b4b4b4;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  text-align: start;
+}
+.OrderList .title {
+  margin-top: 10px;
+  padding-left: 30px;
+  text-align: start;
+}
+
+.OrderList select,
+.OrderList textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.OrderList textarea {
+  resize: none;
+  height: 150px;
+}

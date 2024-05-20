@@ -1,0 +1,50 @@
+.OrderProduct {
+}
+.OrderProduct h2 {
+  text-align: center;
+}
+.OrderProduct table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+
+  overflow-x: auto;
+  table-layout: fixed; /* 테이블 너비를 고정 */
+}
+.OrderProduct td {
+  padding: 10px 20px;
+  text-align: start;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  min-height: 100px;
+}
+.OrderProduct th {
+  text-align: center;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  min-height: 100px;
+}
+
+.OrderProduct table.sub_table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+.OrderProduct table.sub_table th,
+.OrderProduct table.sub_table td {
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.OrderProduct table.sub_table th {
+  border-right: 1px solid #ddd;
+  background-color: #fcfcfc;
+}
+.OrderProduct table.sub_table img {
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+}

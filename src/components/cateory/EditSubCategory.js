@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getCookie } from "../util/Cookies";
-import MyButton from "../components/MyButton";
-import axiosInstance from "../api/AxiosInstance";
-import "../styles/EditSubCategory.css";
+import { getCookie } from "../../util/Cookies";
+import MyButton from "../MyButton";
+import axiosInstance from "../../api/AxiosInstance";
+import "../../styles/EditSubCategory.css";
 
 const filterChildCategories = (categories, parentId) => {
   return categories.filter((category) => category.parentId === parentId);

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
-import axiosInstance from "../api/AxiosInstance";
-import MyButton from "../components/MyButton";
+import axiosInstance from "../../api/AxiosInstance";
+import MyButton from "../MyButton";
 
-import "../styles/EditProduct.css";
+import "../../styles/EditProduct.css";
 
 const EditProductTableTwo = () => {
   const { itemId } = useParams();
@@ -187,6 +187,22 @@ const EditProductTableTwo = () => {
               </th>
               <td>
                 <div className="main_images">
+                  <div>
+                    {mainImages.main_img.length === 0 ? (
+                      <div className="add">
+                        <label>
+                          이미지 추가하기
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleMainImageUpload(0)}
+                          />
+                        </label>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                   {mainImages.main_img.map((imgData, index) => (
                     <div className="main_part" key={imgData.fileUrl}>
                       <div className="delete">
@@ -263,7 +279,7 @@ const EditProductTableTwo = () => {
                         <input
                           type="file"
                           accept="image/*"
-                          onChange={handleMainImageUpload(0)}
+                          onChange={handleSubImageUpload(0)}
                         />
                       </label>
                     </div>
@@ -310,6 +326,8 @@ const EditProductTableTwo = () => {
                   ))}
                 </div>
 
+                {/* 
+                ❌이미지 순서교체 미완❌
                 <div className="sub_images">
                   {mainImages.sub_img.map((imgData, index) => (
                     <div className="sub_part" key={imgData.fileUrl}>
@@ -322,7 +340,7 @@ const EditProductTableTwo = () => {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </td>
             </tr>
           </tbody>

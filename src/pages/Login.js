@@ -19,35 +19,40 @@ const Login = ({ onLogin }) => {
     });
   };
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axiosInstance.post("/adminLogin", {
+  const handleSubmit = () => {
+    axiosInstance
+      .post("/adminLogin", {
         // axiosInstance 사용
         loginId: state.id,
         loginPassword: state.pw,
+      })
+      .then((response) => {
+        const adminId = response.data.adminId;
+        const AuthorizationToken = response.headers.get("Authorization");
+        const RefreshToken = response.headers.get("Refresh_Token");
+
+        // 토큰을 쿠키에 저장
+        setCookie("Id", adminId);
+        setCookie("Authorization", AuthorizationToken);
+        setCookie("Refresh_Token", RefreshToken);
+
+        // 로그인 성공 시 부모 컴포넌트로 토큰 전달
+        onLogin(AuthorizationToken, RefreshToken);
+
+        // 로그인 성공 알림
+        alert("로그인이 완료되었습니다.");
+        navigate(-1);
+
+        console.log("로그인 서버 전송: ", response);
+      })
+      .catch((error) => {
+        console.error("로그인 에러:", error);
+        alert("유효하지 않은 회원정보입니다. 다시 입력해주세요.");
+      })
+      .finally(() => {
+        // 로그인이 성공하든 실패하든 항상 호출되도록 합니다.
+        setState({ id: "", pw: "" }); // 로그인 상태 초기화
       });
-
-      // 서버로부터 받은 토큰
-      const AuthorizationToken = response.headers.get("Authorization");
-      const RefreshToken = response.headers.get("Refresh_Token");
-
-      // 토큰을 쿠키에 저장
-      setCookie("Authorization", AuthorizationToken);
-      setCookie("Refresh_Token", RefreshToken);
-
-      // 로그인 성공 시 부모 컴포넌트로 토큰 전달
-      onLogin(AuthorizationToken, RefreshToken);
-
-      // 로그인 성공 알림
-      setState({ id: "", pw: "" });
-      alert("로그인이 완료되었습니다.");
-
-      navigate(-1);
-    } catch (error) {
-      console.error("로그인 에러:", error);
-      alert("유효하지 않은 회원정보입니다. 다시 입력해주세요.");
-      setState({ id: "", pw: "" });
-    }
   };
 
   return (

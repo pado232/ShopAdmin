@@ -1,0 +1,80 @@
+.Announcement {
+}
+.Announcement .write_btn {
+  width: 95%;
+  min-width: 1200px;
+  padding: 30px;
+  text-align: center;
+}
+.Announcement table {
+  width: 100%;
+  min-width: 1300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+.Announcement th,
+.Announcement td {
+  padding: 5px 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.Announcement td {
+  padding: 0;
+}
+.Announcement td > div {
+  padding: 3px 0;
+}
+.Announcement .btnbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Announcement .btnbox > div {
+  padding: 10px;
+}
+.Announcement .pagination {
+  min-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Announcement .star_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Announcement table .star_box > div {
+  padding: 0 5px;
+}
+
+.Announcement .review {
+  margin: 10px;
+  text-align: start;
+}
+.Announcement .review .review_title {
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+.Announcement .review .review_content {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.Announcement .select_box > div {
+  display: flex;
+  padding: 10px;
+}
+.Announcement .select_box .select_status {
+  width: 10%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.Announcement select {
+  width: 120px;
+  padding: 7px 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}

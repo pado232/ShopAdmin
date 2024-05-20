@@ -1,9 +1,10 @@
 import React from "react";
+
 import Container from "../components/Container";
-import EditProductTableOne from "../components/EditProductTableOne";
+import EditProductTableOne from "../components/EditProduct/EditProductTableOne";
+import EditProductTableTwo from "../components/EditProduct/EditProductTableTwo";
 
 import "../styles/EditProduct.css";
-import EditProductTableTwo from "../components/EditProductTableTwo";
 
 const EditProduct = () => {
   return (

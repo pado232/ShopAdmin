@@ -129,25 +129,31 @@ const ItemList = () => {
           <table>
             <colgroup>
               <col style={{ width: 50 }} />
+              <col style={{ width: 100 }} />
               <col style={{ width: 150 }} />
-              <col style={{ width: 300 }} />
+              <col style={{ width: 350 }} />
+              <col style={{ width: 100 }} />
+
+              <col style={{ width: 80 }} />
               <col style={{ width: 100 }} />
               <col style={{ width: 100 }} />
               <col style={{ width: 100 }} />
-              <col style={{ width: 100 }} />
-              <col style={{ width: 100 }} />
+              <col style={{ width: 200 }} />
               <col style={{ width: 300 }} />
             </colgroup>
             <thead>
               <tr>
                 <th>번호</th>
                 <th>상품번호</th>
+                <th>대표 이미지</th>
                 <th>상품명</th>
                 <th>가격</th>
+
                 <th>할인률</th>
                 <th>할인가</th>
                 <th>판매 가격</th>
                 <th>판매 여부</th>
+                <th>수익</th>
                 <th>상세 보기</th>
               </tr>
             </thead>
@@ -156,17 +162,33 @@ const ItemList = () => {
                 <tr key={index}>
                   <td>{10 * nowPage + index - 9}</td>
                   <td>{item.itemId}</td>
+                  <td>
+                    <div>
+                      <div>
+                        <img
+                          style={{
+                            margin: 10,
+                            width: 80,
+                            height: 80,
+                          }}
+                          src={item.mainImg}
+                          alt="상품 대표 이미지"
+                        />
+                      </div>
+                    </div>
+                  </td>
                   <td>{item.name}</td>
-                  <td>{item.price}</td>
+                  <td>{item.price.toLocaleString()}</td>
                   <td>{item.discountRate}%</td>
-                  <td>{item.discountPrice}</td>
-                  <td>{item.sellPrice}</td>
+                  <td>{item.discountPrice.toLocaleString()}</td>
+                  <td>{item.sellPrice.toLocaleString()}</td>
                   <td>{item.sell ? "판매 중" : "판매 중지"}</td>
+                  <td>{item.revenue.toLocaleString()}</td>
                   <td>
                     <div className="btnbox">
                       <div>
                         <MyButton
-                          buttonText={"수정하기"}
+                          buttonText={"상세보기"}
                           onClick={() =>
                             navigate(`/editproduct/${item.itemId}`)
                           } // 프로그래밍 방식 라우팅

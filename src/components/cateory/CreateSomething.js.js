@@ -1,35 +1,31 @@
 import { useRef, useState } from "react";
-import MyButton from "./MyButton";
-import "../styles/CreateSubCategory.css";
-import axiosInstance from "../api/AxiosInstance";
+import MyButton from "../MyButton";
+import "../../styles/CreateSomething.css";
+import axiosInstance from "../../api/AxiosInstance";
 
-const CreateSubCategory = ({ fetchCategories, parentId }) => {
+const CreateSomething = ({ fetchCategories }) => {
   const inputRef = useRef();
-  const [subCategory, setSubCategory] = useState({
-    parentId: 0,
+  const [mainCategory, setMainCategory] = useState({
     main: "",
   });
 
   const handleCategoryChange = (e) => {
     const { name, value } = e.target;
-
-    setSubCategory((prevCategory) => ({
+    setMainCategory((prevCategory) => ({
       ...prevCategory,
       [name]: value,
-      parentId: parseInt(parentId),
     }));
   };
 
-  const onSubCreate = () => {
-    if (subCategory.main.length < 1) {
+  const onCreate = () => {
+    if (mainCategory.main.length < 1) {
       inputRef.current.focus();
       return;
     }
-
+    console.log(mainCategory);
     axiosInstance
-      .post(`/admin/category`, {
-        name: subCategory.main,
-        parentId: subCategory.parentId,
+      .post(`/admin/category/view`, {
+        name: mainCategory.main,
       })
       .then((response) => {
         console.log("POST Success:", response);
@@ -39,25 +35,26 @@ const CreateSubCategory = ({ fetchCategories, parentId }) => {
         console.error("Error:", error);
       });
 
-    setSubCategory({ main: "" });
+    setMainCategory({ main: "" });
   };
 
   return (
-    <div className="CreateSubCategory">
+    <div className="CreateSomething">
       <div className="create">
         <div className="input">
           <input
             name="main"
             ref={inputRef}
-            value={subCategory.main}
+            value={mainCategory.main}
             onChange={handleCategoryChange}
           />
         </div>
         <div className="button">
-          <MyButton buttonText={"추가하기"} onClick={onSubCreate} />
+          <MyButton buttonText={"추가하기"} onClick={onCreate} />
         </div>
       </div>
     </div>
   );
 };
-export default CreateSubCategory;
+
+export default CreateSomething;

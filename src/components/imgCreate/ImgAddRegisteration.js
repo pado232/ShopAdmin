@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImgAddMain from "./ImgAddMain";
-import MyButton from "./MyButton";
-import "../styles/ImgAddRegisteration.css";
+import MyButton from "../MyButton";
+import "../../styles/ImgAddRegisteration.css";
 
 const ImgAddRegisteration = ({ handleImageChange }) => {
   const [mainimg, setMainImg] = useState([""]);

@@ -8,6 +8,11 @@ import Header from "./components/Header";
 import { MenuDummy } from "./util/MenuDummy";
 import EditProduct from "./pages/EditProduct";
 import { setCookie, getCookie, removeCookie } from "./util/Cookies";
+import axiosInstance from "./api/AxiosInstance";
+import OrderProduct from "./pages/OrderProduct";
+import AnnouncementDetail from "./components/Announcement/AnnouncementDetail";
+import AddAnnouncement from "./components/Announcement/AddAnnouncement";
+import EditAnnouncement from "../src/components/Announcement/EditAnnouncement";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,9 +32,20 @@ function App() {
 
   // 로그아웃 함수
   const handleLogout = () => {
+    axiosInstance
+      .post(`/admin/${getCookie("Id")}/logout`)
+      .then((response) => {
+        console.log("로그아웃 성공", response);
+      })
+      .catch((error) => {
+        console.error("로그아웃 에러:", error);
+      });
+
+    // 로그아웃 상태로 설정
     removeCookie("Authorization"); // 쿠키에서 accessToken 제거
     removeCookie("Refresh_Token");
-    setIsLoggedIn(false); // 로그아웃 상태로 설정
+    removeCookie("Id");
+    setIsLoggedIn(false);
   };
 
   return (
@@ -54,6 +70,16 @@ function App() {
             })
           )}
           <Route path="/editproduct/:itemId" element={<EditProduct />} />
+          <Route path="/orderproduct/:orderId" element={<OrderProduct />} />
+          <Route
+            path="/announcement/:announcementId"
+            element={<AnnouncementDetail />}
+          />
+          <Route
+            path="/announcement/edit/:announcementId"
+            element={<EditAnnouncement />}
+          />
+          <Route path="/Myannouncement/write" element={<AddAnnouncement />} />
           {/* 추가적으로 정적인 라우트도 설정할 수 있습니다 */}
           <Route path="/" element={<Home />} />
           {/* 로그인 및 로그아웃 페이지 */}

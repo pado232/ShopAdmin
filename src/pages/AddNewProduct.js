@@ -6,10 +6,10 @@ import "../styles/Menu.css";
 import "../styles/AddNewProduct.css";
 import "../styles/Container.css";
 import MyButton from "../components/MyButton";
-import ImgRegistration from "../components/ImgRegisteration";
+import ImgRegistration from "../components/imgCreate/ImgRegisteration";
 import Container from "../components/Container";
 import CategoryChoose from "../components/CategoryChoose";
-import ImgAddRegisteration from "../components/ImgAddRegisteration";
+import ImgAddRegisteration from "../components/imgCreate/ImgAddRegisteration";
 
 const AddNewProduct = () => {
   const inputRef = useRef([]);
@@ -47,7 +47,13 @@ const AddNewProduct = () => {
     if (value.trim() === "") {
       setItem((prevState) => ({
         ...prevState,
-        [name]: "0",
+        [name]:
+          name === "price" ||
+          name === "discountRate" ||
+          name === "stock" ||
+          name === "sellPrice"
+            ? "0"
+            : prevState.value,
         discountRate: name === "price" ? "0" : prevState.discountRate,
         discountPrice: name === "price" ? "0" : prevState.discountPrice,
         sellPrice: name === "price" ? "0" : prevState.sellPrice,
@@ -59,7 +65,13 @@ const AddNewProduct = () => {
     if (value[0] === "0") {
       setItem((prevState) => ({
         ...prevState,
-        [name]: value.slice(1),
+        [name]:
+          name === "price" ||
+          name === "discountRate" ||
+          name === "stock" ||
+          name === "sellPrice"
+            ? value.slice(1)
+            : prevState.value,
       }));
       return;
     }
