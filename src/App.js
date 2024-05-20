@@ -13,6 +13,7 @@ import OrderProduct from "./pages/OrderProduct";
 import AnnouncementDetail from "./components/Announcement/AnnouncementDetail";
 import AddAnnouncement from "./components/Announcement/AddAnnouncement";
 import EditAnnouncement from "../src/components/Announcement/EditAnnouncement";
+import MemberDetails from "./pages/MemberDetails";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,6 +80,8 @@ function App() {
             path="/announcement/edit/:announcementId"
             element={<EditAnnouncement />}
           />
+          <Route path="/member/:memberId" element={<MemberDetails />} />
+
           <Route path="/Myannouncement/write" element={<AddAnnouncement />} />
           {/* 추가적으로 정적인 라우트도 설정할 수 있습니다 */}
           <Route path="/" element={<Home />} />
