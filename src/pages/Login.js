@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import MyButton from "../components/MyButton";
-import Container from "../components/Container";
 import { setCookie } from "../util/Cookies";
 import axiosInstance from "../api/AxiosInstance";
 
@@ -57,32 +56,31 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="Login">
-      <Container>
-        <div className="login_container">
-          <div className="logoin_warpper">
-            <form>
-              <input
-                name="id"
-                placeholder="아이디"
-                value={state.id}
-                onChange={handleChangeState}
-                autoComplete="username"
-              />
-              <input
-                name="pw"
-                type="password"
-                placeholder="비밀번호"
-                value={state.pw}
-                onChange={handleChangeState}
-                autoComplete="current-password"
-              />
-            </form>
-          </div>
-          <div className="button_warpper">
-            <MyButton onClick={handleSubmit} buttonText={"로그인"} />
-          </div>
+      <h2>LOGIN</h2>
+      <div className="login_container">
+        <div className="logoin_warpper">
+          <form>
+            <input
+              name="id"
+              placeholder="아이디"
+              value={state.id}
+              onChange={handleChangeState}
+              autoComplete="username"
+            />
+            <input
+              name="pw"
+              type="password"
+              placeholder="비밀번호"
+              value={state.pw}
+              onChange={handleChangeState}
+              autoComplete="current-password"
+            />
+          </form>
         </div>
-      </Container>
+        <div className="button_warpper">
+          <MyButton onClick={handleSubmit} buttonText={"로그인"} />
+        </div>
+      </div>
     </div>
   );
 };

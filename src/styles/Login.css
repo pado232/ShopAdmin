@@ -7,11 +7,15 @@ header h2 {
   justify-content: center;
   align-items: center;
 }
+.Login h2 {
+  margin-top: 220px;
+  text-align: center;
+}
 .Login .login_container {
-  margin: 50px auto;
+  margin: 20px auto;
   width: 300px;
   padding: 50px;
-  background-color: #f8f8f8;
+  background-color: #f3f3f3;
   border: 2px solid eee;
   border-radius: 10px;
 }

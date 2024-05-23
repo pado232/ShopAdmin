@@ -13,15 +13,22 @@ const Header = ({ isLoggedIn, onLogout }) => {
         <h2>관리자 페이지</h2>
       </div>
 
-      <div className="login">
-        {isLoggedIn ? (
-          <a href="/" onClick={handleToggle}>
-            LOGOUT
-          </a>
-        ) : (
+      {isLoggedIn ? (
+        <div className="login">
+          <div>
+            <a href="/mypage">My_Page</a>
+          </div>
+          <div>
+            <a href="/" onClick={handleToggle}>
+              LOGOUT
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div className="logout">
           <a href="/login">LOGIN</a>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 };

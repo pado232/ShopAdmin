@@ -1,5 +1,11 @@
 .ItemList {
 }
+.ItemList h3 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  min-width: 1200px;
+}
 .ItemList .select_box {
   display: flex;
   width: 100%;
@@ -56,18 +62,21 @@
   border-radius: 5px;
   background-color: #e4e4e4;
 }
+
 .ItemList table {
   width: 100%;
   min-width: 1300px;
   border-collapse: collapse;
   border: 1px solid #ddd;
 }
-
 .ItemList th,
 .ItemList td {
   padding: 5px 10px;
   text-align: center;
   border-bottom: 1px solid #ddd;
+}
+.ItemList table.addtable th {
+  background-color: #fff5f5;
 }
 .ItemList td {
   padding: 0;
@@ -86,4 +95,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.ItemList input {
+  width: 200px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ItemList input[type="number"]::-webkit-outer-spin-button,
+.ItemList input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.ItemList input[type="number"] {
+  -moz-appearance: textfield;
 }

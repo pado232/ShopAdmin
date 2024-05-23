@@ -9,6 +9,8 @@ import CustomerReviews from "../pages/CustomerReviews";
 import QAndA from "../pages/QAndA";
 import OneOnOne from "../pages/OneOnOne";
 import MemberManagement from "../pages/MemberManagement.js";
+import AdminManagement from "../pages/AdminManagement.js";
+import GradeManagement from "../pages/GradeManagement.js";
 
 export const MenuDummy = [
   {
@@ -47,6 +49,16 @@ export const MenuDummy = [
     ],
   },
   {
+    title: "직원 관리",
+    children: [
+      {
+        title: "직원 목록 조회",
+        url: "/admin",
+        component: AdminManagement,
+      },
+    ],
+  },
+  {
     title: "문의/평가 관리",
     children: [
       {
@@ -74,11 +86,15 @@ export const MenuDummy = [
         url: "/announcement",
         component: Announcement,
       },
-
       {
         title: "웹사이트 콘텐츠 관리 - 배너, 푸터, 메뉴 등",
         url: "/sitecontent",
         component: SiteContentsManagement,
+      },
+      {
+        title: "고객 등급 관리",
+        url: "/customergrade",
+        component: GradeManagement,
       },
     ],
   },

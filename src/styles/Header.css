@@ -29,13 +29,23 @@
   justify-content: center;
   align-items: center;
 }
-.login {
-  width: 15%;
+.logout {
+  width: 17%;
   justify-content: end;
   align-items: center;
 }
-.login a {
+.logout a {
   width: 100%;
+  text-align: center;
+}
+
+.login {
+  width: 10%;
+  justify-content: end;
+  align-items: center;
+}
+.login > div {
+  padding: 20px;
   text-align: center;
 }
 

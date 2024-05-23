@@ -14,6 +14,8 @@ import AnnouncementDetail from "./components/Announcement/AnnouncementDetail";
 import AddAnnouncement from "./components/Announcement/AddAnnouncement";
 import EditAnnouncement from "../src/components/Announcement/EditAnnouncement";
 import MemberDetails from "./pages/MemberDetails";
+import AdminDetails from "./components/Admin/AdminDetails";
+import MyPage from "./pages/MyPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,7 +56,7 @@ function App() {
       <div className="App">
         <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />{" "}
         {/* 로그인 상태 및 로그아웃 함수 전달 */}
-        <Menu />
+        {isLoggedIn && <Menu />} {/* 로그인되었을 때만 메뉴 표시 */}
         <Routes>
           {/* 각 메뉴 항목에 대한 라우트를 동적으로 생성합니다 */}
           {MenuDummy.map((menu, index) =>
@@ -81,12 +83,14 @@ function App() {
             element={<EditAnnouncement />}
           />
           <Route path="/member/:memberId" element={<MemberDetails />} />
-
           <Route path="/Myannouncement/write" element={<AddAnnouncement />} />
+          <Route path="/admin/:adminId" element={<AdminDetails />} />
+
           {/* 추가적으로 정적인 라우트도 설정할 수 있습니다 */}
           <Route path="/" element={<Home />} />
           {/* 로그인 및 로그아웃 페이지 */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/mypage" element={<MyPage />} />
           {/* 로그인 페이지에 로그인 함수 전달 */}
         </Routes>
       </div>

@@ -61,7 +61,7 @@ const OrderProduct = () => {
             <tbody>
               <tr>
                 <th>상품 아이디</th>
-                <td>{order.oderId}</td>
+                <td>{order.orderId}</td>
               </tr>
               <tr>
                 <th>로그인 아이디</th>

@@ -20,10 +20,10 @@ const MemberDetailTableOne = () => {
         const memberDtailsData = res.data;
 
         setMemberDetails(memberDtailsData);
-        console.log("fetchMemberDetails GET", res);
+        console.log("MemberDetails GET", res);
       })
       .catch((error) => {
-        console.log("fetchMemberDetails Error", error);
+        console.log("MemberDetails Error", error);
       });
   };
 
@@ -38,8 +38,10 @@ const MemberDetailTableOne = () => {
         <div>
           {memberDetails && (
             <table>
-              <colgroup style={{ width: 130 }} />
-              <colgroup style={{ width: 1000 }} />
+              <colgroup>
+                <col style={{ width: 130 }} />
+                <col style={{ width: 1000 }} />
+              </colgroup>
               <tbody>
                 <tr>
                   <th>회원 번호</th>
@@ -48,14 +50,15 @@ const MemberDetailTableOne = () => {
                 <tr>
                   <th>등급</th>
                   <td>
+                    {/* 값이 안나오는 문제 ?로 값이 있는지 확인하고 출력 */}
                     <div style={{ padding: 5 }}>
-                      {memberDetails.grade.gradeName}
+                      {memberDetails.grade?.gradeName}
                     </div>
                     <div>
                       [해당 등급 연간 달성 금액] :{" "}
-                      {memberDetails.grade.gradePrice.toLocaleString()} 원
+                      {memberDetails.grade?.gradePrice.toLocaleString()} 원
                     </div>
-                    <div>[적립률] : {memberDetails.grade.rewardRate} %</div>
+                    <div>[적립률] : {memberDetails.grade?.rewardRate} %</div>
                   </td>
                 </tr>
                 <tr>

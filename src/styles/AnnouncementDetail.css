@@ -66,3 +66,29 @@
 .AnnouncementDetail .btn > div {
   margin: 20px;
 }
+
+.AnnouncementDetail .edit_con {
+  margin: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AnnouncementDetail .edit_con > div {
+  margin-right: 40px;
+}
+.AnnouncementDetail .edit_con .btn {
+  min-width: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
+.AnnouncementDetail .edit_con .btn > div {
+  margin: 0;
+  margin-right: 30px;
+}
+.AnnouncementDetail input {
+  width: 230px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

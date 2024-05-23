@@ -97,8 +97,10 @@ const EditAnnouncement = () => {
           <div>
             {announcement && (
               <table>
-                <colgroup style={{ width: 120 }} />
-                <colgroup style={{ width: 1000 }} />
+                <colgroup>
+                  <col style={{ width: 120 }} />
+                  <col style={{ width: 1000 }} />
+                </colgroup>
                 <tbody>
                   <tr>
                     <th>고정 여부</th>

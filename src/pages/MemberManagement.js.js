@@ -5,7 +5,6 @@ import axiosInstance from "../api/AxiosInstance";
 import Container from "../components/Container";
 import Pagination from "../components/Pagination";
 import MyButton from "../components/MyButton";
-import CategoryChooseAll from "../components/CategoryChooseAll";
 
 import "../styles/ItemList.css";
 import DateFormat from "../util/DateFormat";
