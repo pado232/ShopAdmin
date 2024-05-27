@@ -32,7 +32,11 @@ const CreateSomething = ({ fetchCategories }) => {
         fetchCategories();
       })
       .catch((error) => {
-        console.error("Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("카테고리를 작성할 수 있는 권한이 없습니다.");
+        } else {
+          console.error("Error:", error);
+        }
       });
 
     setMainCategory({ main: "" });

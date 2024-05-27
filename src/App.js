@@ -16,6 +16,7 @@ import EditAnnouncement from "../src/components/Announcement/EditAnnouncement";
 import MemberDetails from "./pages/MemberDetails";
 import AdminDetails from "./components/Admin/AdminDetails";
 import MyPage from "./pages/MyPage";
+import CheckPermissions from "./api/CheckPermissions";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,6 +60,8 @@ function App() {
         {isLoggedIn && <Menu />} {/* 로그인되었을 때만 메뉴 표시 */}
         <Routes>
           {/* 각 메뉴 항목에 대한 라우트를 동적으로 생성합니다 */}
+
+          {/* Error Boundary를 루트 컴포넌트로 사용합니다. */}
           {MenuDummy.map((menu, index) =>
             // 각 메뉴 항목의 URL 및 컴포넌트를 가져와서 라우트를 생성합니다
             menu.children.map((child, childIndex) => {
@@ -91,6 +94,7 @@ function App() {
           {/* 로그인 및 로그아웃 페이지 */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/notAuthorization" element={<CheckPermissions />} />
           {/* 로그인 페이지에 로그인 함수 전달 */}
         </Routes>
       </div>

@@ -23,7 +23,12 @@ const EditOrderStatus = ({ orderStatus, orderId, onStatusChange }) => {
         window.alert("주문 상태가 변경되었습니다.");
       })
       .catch((error) => {
-        console.error("fetchEditOrderStatus PATCH Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("주문 상태를 변경할 권한이 없습니다.");
+          setStatus(orderStatus);
+        } else {
+          console.error("fetchEditOrderStatus PATCH Error:", error);
+        }
       });
   };
 

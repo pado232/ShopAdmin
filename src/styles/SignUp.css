@@ -1,0 +1,60 @@
+.SignUp {
+}
+.SignUp h2 {
+  text-align: center;
+}
+.signup_content {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px 50px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+}
+.SignUp .signup_title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.SignUp input {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.SignUp input:focus::placeholder {
+  color: transparent;
+}
+.SignUp .pw_error {
+  color: rgb(255, 25, 25);
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.SignUp .signup_content .ckbtn {
+  background-color: rgb(255, 239, 239);
+  color: rgb(0, 0, 0);
+
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.SignUp .signup_content .ckbtn:active {
+  box-shadow: none;
+}
+.SignUp .btnbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SignUp .btnbox > div {
+  padding: 10px;
+}
+.SignUp .ckbtnbox {
+  padding: 10px;
+}

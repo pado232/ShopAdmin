@@ -175,7 +175,14 @@ const AddNewProduct = () => {
         window.location.reload();
       })
       .catch((error) => {
-        console.error("Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert(
+            "새 상품을 등록할 권한이 없습니다. 작성하신 내용은 사라집니다."
+          );
+          window.location.reload();
+        } else {
+          console.error("Error:", error);
+        }
       });
   };
 

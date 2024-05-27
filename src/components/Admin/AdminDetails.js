@@ -6,11 +6,11 @@ import MyButton from "../MyButton";
 
 import "../../styles/OrderProduct.css";
 import EditAdminRole from "./EditAdminRole";
+import CheckPermissions from "../../api/CheckPermissions";
 
 const AdminDetails = () => {
   const { adminId } = useParams();
   const navigate = useNavigate();
-
   const [adminDetails, setAdminDetails] = useState({
     adminId: "",
     loginId: "",
@@ -18,6 +18,8 @@ const AdminDetails = () => {
     name: 0,
     roles: "",
   });
+
+  const [authError, setAuthError] = useState(false);
 
   const fetchAdminDetails = () => {
     axiosInstance
@@ -30,7 +32,12 @@ const AdminDetails = () => {
         console.log("AdminDetails GET ", res);
       })
       .catch((error) => {
-        console.error("AdminDetails GET Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          setAuthError(true);
+          CheckPermissions();
+        } else {
+          console.error("AdminDetails GET Error:", error);
+        }
       });
   };
 
@@ -58,6 +65,14 @@ const AdminDetails = () => {
     } else {
     }
   };
+
+  if (authError) {
+    return (
+      <div>
+        <CheckPermissions />
+      </div>
+    );
+  }
 
   return (
     <div className="OrderProduct">

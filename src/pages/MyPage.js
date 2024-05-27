@@ -23,8 +23,8 @@ const MyPage = () => {
         const myInfoData = res.data;
 
         setMyInfo(myInfoData);
-        setEditedName(myInfoData.name);
-        setEditedEmail(myInfoData.email);
+        setEditedName(myInfoData.name || "");
+        setEditedEmail(myInfoData.email || "");
 
         console.log("MyInfo GET ", res);
       })
@@ -64,6 +64,7 @@ const MyPage = () => {
           email: editedEmail,
           name: editedName,
         });
+        fetchMyInfo();
       })
       .catch((error) => {
         console.error("EditMyInfo GET Error:", error);
@@ -125,7 +126,7 @@ const MyPage = () => {
                               }}
                             />
                           </div>
-                          <div div className="btn">
+                          <div className="btn">
                             <MyButton
                               buttonText={"저장하기"}
                               onClick={handleEmailSubmit}

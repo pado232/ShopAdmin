@@ -67,7 +67,11 @@ const ItemList = () => {
           }
         })
         .catch((error) => {
-          console.error("Error deleting item:", error);
+          if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+            window.alert("상품을 삭제할 수 있는 권한이 없습니다.");
+          } else {
+            console.error("Error:", error);
+          }
         });
     } else {
       console.log("삭제가 취소되었습니다.");

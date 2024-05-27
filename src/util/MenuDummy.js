@@ -11,6 +11,7 @@ import OneOnOne from "../pages/OneOnOne";
 import MemberManagement from "../pages/MemberManagement.js";
 import AdminManagement from "../pages/AdminManagement.js";
 import GradeManagement from "../pages/GradeManagement.js";
+import SignUp from "../pages/SignUp.js";
 
 export const MenuDummy = [
   {
@@ -95,6 +96,16 @@ export const MenuDummy = [
         title: "고객 등급 관리",
         url: "/customergrade",
         component: GradeManagement,
+      },
+    ],
+  },
+  {
+    title: "관리자 가입 관리",
+    children: [
+      {
+        title: "관리자 가입",
+        url: "/signUp",
+        component: SignUp,
       },
     ],
   },

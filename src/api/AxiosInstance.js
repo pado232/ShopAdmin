@@ -25,10 +25,13 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const {
-      response: { status },
+      response: { status, data },
     } = error;
 
-    if (status === 403) {
+    console.log("에러 받기", data.message);
+
+    if (data.message === "NOT_AUTHORIZATION") {
+    } else if (status === 403) {
       try {
         // 재발급 요청을 보내기 전에 이전 토큰과 리프레시 토큰을 가져옴
         // const oldAuthorization = getCookie("Authorization");
@@ -49,6 +52,7 @@ axiosInstance.interceptors.response.use(
         console.log("재발급 성공", res.data);
 
         // 새로운 토큰 및 만료 시간 저장
+
         const AuthorizationToken = res.headers.get("Authorization");
         const RefreshToken = res.headers.get("Refresh_Token");
 
@@ -62,7 +66,6 @@ axiosInstance.interceptors.response.use(
         throw new Error("토큰 갱신 실패");
       }
     }
-
     return Promise.reject(error);
   }
 );

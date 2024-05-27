@@ -28,6 +28,7 @@ const EditSomething = ({ fetchCategories, getData }) => {
   );
 
   const onUpdate = () => {
+    let unauthorizedMessageDisplayed = false;
     setEditToggle(false);
     axiosInstance
       .patch(`/admin/category`, {
@@ -39,7 +40,15 @@ const EditSomething = ({ fetchCategories, getData }) => {
         fetchCategories();
       })
       .catch((error) => {
-        console.error("Error:", error);
+        if (
+          error.response?.data?.message === "NOT_AUTHORIZATION" &&
+          !unauthorizedMessageDisplayed
+        ) {
+          window.alert("카테고리를 수정할 수 있는 권한이 없습니다.");
+          unauthorizedMessageDisplayed = true;
+        } else {
+          console.error("Error:", error);
+        }
       });
   };
 
@@ -60,6 +69,8 @@ const EditSomething = ({ fetchCategories, getData }) => {
     await deleteCategory(categoryToDelete);
   };
 
+  let unauthorizedMessageDisplayed = false;
+
   const deleteCategory = async (category) => {
     try {
       await axiosInstance.delete(
@@ -68,7 +79,15 @@ const EditSomething = ({ fetchCategories, getData }) => {
       console.log("Category deleted successfully:", category);
       fetchCategories();
     } catch (error) {
-      console.error("Error deleting category:", error);
+      if (
+        error.response?.data?.message === "NOT_AUTHORIZATION" &&
+        !unauthorizedMessageDisplayed
+      ) {
+        window.alert("카테고리를 삭제할 수 있는 권한이 없습니다.");
+        unauthorizedMessageDisplayed = true;
+      } else {
+        console.error("Error:", error);
+      }
     }
   };
 

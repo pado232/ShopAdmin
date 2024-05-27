@@ -105,7 +105,13 @@ const QAndA = () => {
         console.log("QAComment PUT ", response);
       })
       .catch((error) => {
-        console.error("QAComment PUT Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("Q&A에 대한 답변을 수정할 수 있는 권한이 없습니다.");
+          setEditIndex(null);
+          setContent("");
+        } else {
+          console.error("QAComment Error:", error);
+        }
       });
   };
 
@@ -117,7 +123,11 @@ const QAndA = () => {
         console.log("QAComment DELETE ", response);
       })
       .catch((error) => {
-        console.error("QAComment DELETE Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("Q&A에 대한 답변을 삭제할 수 있는 권한이 없습니다.");
+        } else {
+          console.error("QAComment DELETE Error:", error);
+        }
       });
   };
 
@@ -143,7 +153,13 @@ const QAndA = () => {
         console.log("QAComment create POST", response);
       })
       .catch((error) => {
-        console.error("QAComment create POST Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("Q&A에 답변할 수 있는 권한이 없습니다.");
+          setCreateIndex(null);
+          setAddContent("");
+        } else {
+          console.error("QAComment create POST Error:", error);
+        }
       });
   };
 
@@ -162,7 +178,7 @@ const QAndA = () => {
       <Container>
         <h2>Q&A 목록 조회</h2>
         <div style={{ marginBottom: 20, textAlign: "center" }}>
-          {itemId === "" ? (
+          {itemId === undefined || itemId === "" ? (
             ""
           ) : (
             <div>

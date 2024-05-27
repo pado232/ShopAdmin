@@ -10,11 +10,13 @@ import MyButton from "../MyButton";
 
 import "../../styles/AddAnnouncement.css";
 import { getCookie } from "../../util/Cookies";
+import CheckPermissions from "../../api/CheckPermissions";
 
 const EditAnnouncement = () => {
   const { announcementId } = useParams();
   const navigate = useNavigate();
   const [fixToggle, setFixToggle] = useState(false);
+  const [authError, setAuthError] = useState(false);
   const [announcement, setAnnouncement] = useState({
     title: "",
     content: "",
@@ -35,7 +37,11 @@ const EditAnnouncement = () => {
         console.log("fetchEditAnnouncement GET", res);
       })
       .catch((error) => {
-        console.log("fetchEditAnnouncement Error", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          setAuthError(true);
+        } else {
+          console.log("fetchEditAnnouncement Error", error);
+        }
       });
   };
 
@@ -86,6 +92,14 @@ const EditAnnouncement = () => {
     } else {
     }
   };
+
+  if (authError) {
+    return (
+      <div>
+        <CheckPermissions />
+      </div>
+    );
+  }
 
   return (
     <div className="EditAddAnnouncement">

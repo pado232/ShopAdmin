@@ -56,7 +56,7 @@ const CustomerReviews = () => {
         <div>
           <h2 style={{ marginBottom: 40 }}> 고객 리뷰 및 평가 관리</h2>
           <div style={{ marginBottom: 20, textAlign: "center" }}>
-            {itemId === "" ? (
+            {itemId === undefined || itemId === "" ? (
               ""
             ) : (
               <div>

@@ -68,6 +68,8 @@ const AdminManagement = () => {
     fetchAdminList();
   };
 
+  const DetailCilck = () => {};
+
   return (
     <div className="OrderList">
       <Container>

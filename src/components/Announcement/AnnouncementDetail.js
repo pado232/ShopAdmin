@@ -51,7 +51,11 @@ const AnnouncementDetail = () => {
           navigate(-1);
         })
         .catch((error) => {
-          console.log("fetchAnnouncement Error", error);
+          if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+            window.alert("삭제 권한이 없습니다.");
+          } else {
+            console.log("fetchEditAnnouncement Error", error);
+          }
         });
     } else {
     }

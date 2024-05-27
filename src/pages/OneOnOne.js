@@ -60,7 +60,12 @@ const OneOnOne = () => {
         console.log("comment GET ", response);
       })
       .catch((error) => {
-        console.error("comment GET Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("문의에 답변할 수 있는 권한이 없습니다.");
+          setEditIndex(null);
+        } else {
+          console.error("comment GET Error:", error);
+        }
       });
   };
 
@@ -106,7 +111,11 @@ const OneOnOne = () => {
         console.log("comment DELETE ", response);
       })
       .catch((error) => {
-        console.error("comment DELETE Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("문의에 대한 답변을 삭제할 수 있는 권한이 없습니다.");
+        } else {
+          console.error("comment GET Error:", error);
+        }
       });
   };
 
@@ -133,7 +142,13 @@ const OneOnOne = () => {
         console.log("comment create POST", response);
       })
       .catch((error) => {
-        console.error("comment create POST Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("문의에 대한 답변을 작성할 수 있는 권한이 없습니다.");
+          setCreateIndex(null);
+          setAddContent("");
+        } else {
+          console.error("comment GET Error:", error);
+        }
       });
   };
 

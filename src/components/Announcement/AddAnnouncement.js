@@ -54,7 +54,12 @@ const AddAnnouncement = () => {
         navigate(-1);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        if (error.response?.data?.message === "NOT_AUTHORIZATION") {
+          window.alert("공지사항을 등록할 수 있는 권한이 없습니다.");
+          navigate(-1);
+        } else {
+          console.error("Error:", error);
+        }
       });
   };
 

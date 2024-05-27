@@ -16,8 +16,9 @@ header h2 {
   width: 300px;
   padding: 50px;
   background-color: #f3f3f3;
-  border: 2px solid eee;
+  border: 1px solid rgb(228, 228, 228);
   border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 .logoin_warpper {
   display: flex;
@@ -30,6 +31,11 @@ header h2 {
   padding: 10px;
 }
 .button_warpper {
-  margin-top: 10px;
+  margin-top: 20px;
   padding-left: 80px;
+}
+.Login .pw_error {
+  color: rgb(255, 33, 33);
+  font-size: 13px;
+  margin-bottom: 5px;
 }
