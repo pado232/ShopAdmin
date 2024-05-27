@@ -23,9 +23,15 @@ const OrderList = () => {
   const [loginId, setLoginId] = useState("");
   const [merchantUid, setMerchantUid] = useState(""); // 주문 고유번호
 
-  const [selectedDuration, setSelectedDuration] = useState("");
-  const [startDate, setStartDate] = useState(""); // 기간별 주문 겸색을 위한 시작점과 끝점
-  const [lastDate, setLastDate] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState("36");
+  const [startDate, setStartDate] = useState(
+    new Date(new Date().setFullYear(new Date().getFullYear() - 3))
+      .toISOString()
+      .split("T")[0]
+  ); // 기간별 주문 검색을 위한 시작점과 끝점
+  const [lastDate, setLastDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
   const [status, setStatus] = useState("");
 
   const fetchOrderList = () => {
@@ -62,7 +68,7 @@ const OrderList = () => {
   };
   useEffect(() => {
     fetchOrderList();
-  }, [status, nowPage]);
+  }, [status, nowPage, startDate]);
 
   const durationOptions = [
     { value: "1", label: "1개월" },

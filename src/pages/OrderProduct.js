@@ -8,7 +8,10 @@ import "../styles/OrderProduct.css";
 import EditOrderStatus from "../components/EditOrderStatus";
 const OrderProduct = () => {
   const { orderId } = useParams();
-
+  const [totalDiscountPrice, setTotalDiscountPrice] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [usePoint, setUsePoint] = useState("");
+  const [getPoint, setGetPoint] = useState("");
   const [order, setOrder] = useState({
     orderId: "",
     loginId: "",
@@ -33,7 +36,16 @@ const OrderProduct = () => {
       .then((response) => {
         const data = response.data;
         const orderData = data.order; // 주문 목록 데이터
+        const totalDiscountPriceData = data.totalDiscountPrice;
+        const totalPriceData = data.totalPrice;
+        const usePointData = data.usePoint;
+        const getPointData = data.getPoint;
+
         setOrder(orderData);
+        setTotalDiscountPrice(totalDiscountPriceData);
+        setTotalPrice(totalPriceData);
+        setUsePoint(usePointData);
+        setGetPoint(getPointData);
 
         console.log("orderProduct GET ", response);
       })
@@ -75,7 +87,7 @@ const OrderProduct = () => {
               </tr>
               <tr>
                 <th>구매 가격</th>
-                <td>{order.buyPrice.toLocaleString()}</td>
+                <td>{order.buyPrice.toLocaleString()} 원</td>
               </tr>
               <tr>
                 <th>주소</th>
@@ -171,25 +183,19 @@ const OrderProduct = () => {
               </tr>
               <tr>
                 <th>구매 총액</th>
-                <td>
-                  {order.totalPrice ? order.totalPrice.toLocaleString() : ""}
-                </td>
+                <td>{totalPrice.toLocaleString()} 원</td>
               </tr>
               <tr>
                 <th>할인 총액</th>
-                <td>
-                  {order.totalDiscountPrice
-                    ? order.totalDiscountPrice.toLocaleString()
-                    : ""}
-                </td>
+                <td>{totalDiscountPrice.toLocaleString()} 원</td>
               </tr>
               <tr>
                 <th>사용 포인트</th>
-                <td>{order.usePoint ? order.usePoint.toLocaleString() : ""}</td>
+                <td>{usePoint.toLocaleString()} P</td>
               </tr>
               <tr>
                 <th>적립 포인트</th>
-                <td>{order.getPoint ? order.getPoint.toLocaleString() : ""}</td>
+                <td>{getPoint.toLocaleString()} P</td>
               </tr>
             </tbody>
           </table>
