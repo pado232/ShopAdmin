@@ -1,0 +1,78 @@
+.Category {
+  margin: auto;
+  max-width: 1000px;
+  min-width: 850px;
+}
+.Category .title {
+  text-align: center;
+  font-weight: bold;
+  margin: 10px;
+  color: #464646;
+}
+.Category .num {
+  padding-right: 10px;
+  font-weight: bold;
+  font-size: 13px;
+}
+.Category .parent_add {
+  background-color: #ffe1e1;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.Category .parent_add > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Category input {
+  width: 400px;
+  padding: 8px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.Category ul {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 40px;
+}
+.Category li {
+  list-style-type: none;
+  background-color: #fff4f4;
+  margin-bottom: 1px;
+}
+.Category li.sub {
+  background-color: #e6e6e6;
+}
+.Category li > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Category li > div > div {
+  padding: 10px 30px;
+  padding-left: 30px;
+}
+.Category button {
+  margin-left: 15px;
+  min-width: 120px;
+  min-height: 38px;
+
+  padding: 10px 20px;
+
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  background-color: white;
+
+  font-size: 15px;
+  cursor: pointer;
+}
+.Category .addbtn {
+  background-color: rgb(54, 54, 54);
+  color: white;
+  border: 1px solid #000000;
+}

@@ -1,36 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-
-import CreateSomething from "./CreateSomething.js.js";
-import EditSomething from "./EditSomething.js";
-import axiosInstance from "../../api/AxiosInstance.js";
-
+import Category from "./Category.js";
 const CategorySetting = () => {
-  const [getData, setGetData] = useState(null);
-
-  const fetchCategories = useCallback(() => {
-    axiosInstance
-      .get("/admin/category/view")
-      .then((response) => {
-        const data = response.data;
-
-        // categoryId의 값으로 정렬
-        // 수정하면 가장 마지막으로 데이터베이스에 저장되는 문제를 해결하기 위해
-        const sortedData = [...data].sort((a, b) => {
-          return a.categoryId - b.categoryId;
-        });
-        setGetData(sortedData);
-
-        console.log("GET Success:", sortedData);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
-
   return (
     <div className="SiteContentsManagement">
       <h3>카테고리 추가하기</h3>
@@ -96,13 +65,14 @@ const CategorySetting = () => {
         </div>
       </div>
 
-      {getData !== null && (
+      {/* {getData !== null && (
         <>
           <EditSomething fetchCategories={fetchCategories} getData={getData} />
           <strong>상위 카테고리</strong>
         </>
       )}
-      <CreateSomething fetchCategories={fetchCategories} />
+      <CreateSomething fetchCategories={fetchCategories} /> */}
+      <Category />
     </div>
   );
 };

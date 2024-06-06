@@ -36,27 +36,25 @@ const CategoryChooseAll = ({ selectedCategoryId, setSelectedCategoryId }) => {
         }}
       >
         <option value="">전체</option>
-        {categories
-          .filter((category) => category.parentId === null) // 부모 카테고리만 필터링
-          .map((parentCategory) => (
-            <optgroup
-              label={parentCategory.name}
-              key={parentCategory.categoryId}
+        {categories.map((category) => (
+          <optgroup label={category.name} key={category.categoryId}>
+            <option
+              className="parent"
+              key={category.categoryId}
+              value={category.categoryId}
             >
-              {categories
-                .filter(
-                  (category) => category.parentId === parentCategory.categoryId
-                ) // 해당 부모 카테고리의 하위 카테고리 필터링
-                .map((subcategory) => (
-                  <option
-                    key={subcategory.categoryId}
-                    value={subcategory.categoryId}
-                  >
-                    {subcategory.name}
-                  </option>
-                ))}
-            </optgroup>
-          ))}
+              {`${category.name} 전체`}
+            </option>
+            {category.child.map((subcategory) => (
+              <option
+                key={subcategory.categoryId}
+                value={subcategory.categoryId}
+              >
+                {subcategory.name}
+              </option>
+            ))}
+          </optgroup>
+        ))}
       </select>
     </div>
   );

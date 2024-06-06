@@ -26,12 +26,12 @@ const CategoryChoose = ({ item, setItem, selectRef }) => {
 
   const handleCategoryChange = (e) => {
     const selectedCategoryId = parseInt(e.target.value);
-    const filteredSubcategories = categories.filter(
-      (category) => category.parentId === selectedCategoryId
+    const selectedCategory = categories.find(
+      (category) => category.categoryId === selectedCategoryId
     );
-    setSubcategories(filteredSubcategories);
-    // 부모 카테고리만 변경, 하위 카테고리는 변경하지 않음
+    const childCategories = selectedCategory.child || [];
     setItem({ ...item, category: selectedCategoryId });
+    setSubcategories(childCategories); // 부모 카테고리에 해당하는 하위 카테고리 설정
   };
 
   const handleSubcategoryChange = (e) => {
@@ -41,8 +41,7 @@ const CategoryChoose = ({ item, setItem, selectRef }) => {
 
   return (
     <div className="CategoryChoose">
-      {categories.length === 0 ||
-      !categories.some((category) => category.parentId !== null) ? (
+      {categories.length === 0 ? (
         <div>
           <p style={{ fontSize: 14 }}>
             <strong>
@@ -68,13 +67,11 @@ const CategoryChoose = ({ item, setItem, selectRef }) => {
                 부모 카테고리를 선택해주세요
               </option>
             )}
-            {categories
-              .filter((category) => category.parentId === null)
-              .map((category) => (
-                <option key={category.categoryId} value={category.categoryId}>
-                  {category.name}
-                </option>
-              ))}
+            {categories.map((category) => (
+              <option key={category.categoryId} value={category.categoryId}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <select
             name="subcategory"
