@@ -141,7 +141,7 @@ const CategorySetting = () => {
               return a.categoryId - b.categoryId;
             })
             .map((category, index) => (
-              <div>
+              <div key={index}>
                 <div className="title">No.{index + 1} 메인 카테고리</div>
                 <li key={category.categoryId}>
                   {editingCategory === category.categoryId ? (

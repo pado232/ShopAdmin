@@ -56,7 +56,7 @@ const Login = ({ onLogin }) => {
         const RefreshToken = response.headers.get("Refresh_Token");
 
         // 토큰을 쿠키에 저장
-        setCookie("Id", adminId);
+        setCookie("adminId", adminId);
         setCookie("Authorization", AuthorizationToken);
         setCookie("Refresh_Token", RefreshToken);
 

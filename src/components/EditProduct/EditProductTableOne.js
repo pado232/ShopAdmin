@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import axiosInstance from "../../api/AxiosInstance";
-import CategoryChoose from "../CategoryChoose";
 import MyButton from "../MyButton";
-import CategoryChooseEdit from "../CategoryChooseEdit";
 
 const EditProductTableOne = () => {
-  const selectRef = useRef([]);
   const navigate = useNavigate();
 
   const { itemId } = useParams();
+  const [categories, setCategories] = useState([]);
   const [inputValue, setInputValue] = useState({
     category: "",
     subcategory: "",
@@ -23,6 +21,26 @@ const EditProductTableOne = () => {
     stock: "",
     sell: false,
   });
+
+  useEffect(() => {
+    // 카테고리 목록을 가져오는 함수
+    const fetchCategories = () => {
+      axiosInstance
+        .get("/admin/category/view")
+        .then((response) => {
+          const data = response.data;
+          const sortedData = [...data].sort(
+            (a, b) => a.categoryId - b.categoryId
+          );
+          setCategories(sortedData);
+        })
+        .catch((error) => {
+          console.error("Error fetching categories:", error);
+        });
+    };
+
+    fetchCategories(); // 페이지 로드 시 카테고리 목록 가져오기
+  }, []);
 
   const fetchItemDetails = useCallback(async () => {
     try {
@@ -213,16 +231,34 @@ const EditProductTableOne = () => {
                 <th>카테고리</th>
                 <td>
                   <div>
-                    <CategoryChooseEdit
-                      selectRef={selectRef}
-                      item={inputValue}
-                      setItem={setInputValue}
-                    />
-                    <CategoryChoose
-                      selectRef={selectRef}
-                      item={inputValue}
-                      setItem={setInputValue}
-                    />
+                    <div>
+                      <select
+                        name="subcategory"
+                        value={inputValue.subcategory} // <select> 요소의 value 속성에 전달되는 값이 문자열이어야 한다
+                        onChange={(e) => {
+                          setInputValue({
+                            ...inputValue,
+                            [e.target.name]: e.target.value,
+                          });
+                        }}
+                      >
+                        {categories.map((category) => (
+                          <optgroup
+                            label={category.name}
+                            key={category.categoryId}
+                          >
+                            {category.child.map((subcategory, index) => (
+                              <option
+                                key={index}
+                                value={subcategory.categoryId}
+                              >
+                                {subcategory.name}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </td>
               </tr>

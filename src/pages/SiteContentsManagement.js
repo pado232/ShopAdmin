@@ -3,6 +3,7 @@ import CategorySetting from "../components/cateory/CategorySetting.js";
 import { useState } from "react";
 
 import "../styles/SiteContentManagement.css";
+import HomeMainImg from "../components/SiteManagement/HomeMainImg.js";
 
 const SiteContentsManagement = () => {
   const [selectedMenu, setSelectedMenu] = useState("category");
@@ -24,17 +25,13 @@ const SiteContentsManagement = () => {
               className={selectedMenu === "something" ? "clicked" : ""}
               onClick={() => setSelectedMenu("something")}
             >
-              메인도 바꿔볼래?
+              홈 메인 이미지
             </li>
           </ul>
         </div>
 
         {selectedMenu === "category" && <CategorySetting />}
-        {selectedMenu === "something" && (
-          <div>
-            <h2>메인은 안바꿀거지롱</h2>
-          </div>
-        )}
+        {selectedMenu === "something" && <HomeMainImg />}
       </Container>
     </div>
   );

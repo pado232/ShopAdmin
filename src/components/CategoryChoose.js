@@ -7,6 +7,7 @@ const CategoryChoose = ({ item, setItem, selectRef }) => {
 
   useEffect(() => {
     fetchCategories();
+    console.log("item.category", item.category);
   }, []);
 
   const fetchCategories = () => {

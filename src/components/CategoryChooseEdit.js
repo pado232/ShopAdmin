@@ -18,6 +18,7 @@ const CategoryChooseEdit = ({ item, setItem }) => {
           return a.categoryId - b.categoryId;
         });
         setCategories(sortedData);
+        console.log("data", data);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
@@ -36,7 +37,7 @@ const CategoryChooseEdit = ({ item, setItem }) => {
   return (
     <div className="CategoryChoose">
       <div>
-        <div style={{ padding: 5, fontSize: 16 }}>{categoryName}</div>
+        <div style={{ padding: 5, fontSize: 16 }}>{categoryName}hh</div>
       </div>
     </div>
   );

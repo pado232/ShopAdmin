@@ -53,7 +53,7 @@ const MyPage = () => {
 
   const fetchEditMyInfo = () => {
     axiosInstance
-      .patch(`/admin/${getCookie("Id")}`, {
+      .patch(`/admin/${getCookie("adminId")}`, {
         email: editedEmail,
         name: editedName,
       })

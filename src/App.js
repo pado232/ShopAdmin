@@ -37,7 +37,7 @@ function App() {
   // 로그아웃 함수
   const handleLogout = () => {
     axiosInstance
-      .post(`/admin/${getCookie("Id")}/logout`)
+      .post(`/admin/${getCookie("adminId")}/logout`)
       .then((response) => {
         console.log("로그아웃 성공", response);
       })
@@ -48,7 +48,7 @@ function App() {
     // 로그아웃 상태로 설정
     removeCookie("Authorization"); // 쿠키에서 accessToken 제거
     removeCookie("Refresh_Token");
-    removeCookie("Id");
+    removeCookie("adminId");
     setIsLoggedIn(false);
   };
 

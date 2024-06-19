@@ -1,0 +1,140 @@
+.HomeMainImg h3 {
+  text-align: center;
+}
+.HomeMainImg .imgs_box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.HomeMainImg input {
+  display: none;
+}
+/* .HomeMainImg .add_img {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+} */
+.HomeMainImg label {
+  text-align: center;
+  width: 120px;
+
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #eeeeee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: white;
+  font-size: 15px;
+}
+.HomeMainImg label:active {
+  box-shadow: none;
+}
+.HomeMainImg .list_img > div {
+  width: 250px;
+  text-align: center;
+}
+.HomeMainImg .list_img img {
+  max-width: 200px;
+  max-height: 200px;
+}
+.LookImage .imgs_box {
+  min-width: 800px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+}
+.LookImage .list_container {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 8px;
+  width: 200px; /* 이미지 박스 크기 확대 */
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.HomeMainImg .btn_warpper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.HomeMainImg .btn_warpper > div {
+  margin: 20px;
+}
+
+.imageSlider {
+  width: 800px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  z-index: 1;
+}
+.slide {
+  display: flex;
+  justify-content: center;
+  transition: transform 1s ease;
+  &.active {
+    transform: translateX(0);
+  }
+  &:not(.active) {
+    transform: translateX(100%);
+  }
+}
+.imageSlider-arrow {
+  position: absolute;
+  top: 200px;
+  background-color: rgba(189, 189, 189, 0.5);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.5s ease;
+  z-index: 10;
+  &.left {
+    margin-left: 25px;
+  }
+  &.right {
+    left: 750px;
+    margin-right: 25px;
+  }
+}
+.homeimage {
+  max-width: 800px;
+  max-height: 400px;
+}
+
+.imgs_box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto; /* 가로 스크롤 추가 */
+}
+
+.list_container {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 8px;
+  width: 200px; /* 이미지 박스 크기 확대 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list_img img {
+  max-width: 100%;
+  max-height: 100px;
+}
+
+.dragging {
+  background-color: lightblue;
+}
+.site_total_img_none {
+  margin: 50px;
+  font-size: 18px;
+  text-align: center;
+}
