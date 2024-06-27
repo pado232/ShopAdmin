@@ -72,17 +72,16 @@ const EditOrderStatus = ({ orderStatus, orderId, onStatusChange }) => {
             console.log(status);
           }}
         >
-          <option value={"결제준비"}>결제 준비</option>
-          <option value={"결제완료"}>결제 완료</option>
-          <option value={"배송준비"}>배송 준비</option>
-          <option value={"배송중"}>배송 중</option>
-          <option value={"배송완료"}>배송 완료</option>
           {orderStatus === "결제준비" || orderStatus === "결제완료" ? (
             <option value={"결제취소"}>결제 취소</option>
           ) : null}
-          <option value={"환불요청"}>환불 요청</option>
-          <option value={"환불완료"}>환불 완료</option>
-          <option value={"구매확정"}>구매 확정</option>
+          <option value={"배송준비"}>배송 준비</option>
+          <option value={"배송중"}>배송 중</option>
+          <option value={"배송완료"}>배송 완료</option>
+
+          {orderStatus === "환불요청" ? (
+            <option value={"환불완료"}>결제 취소</option>
+          ) : null}
         </select>
       </div>
       {status === "결제취소" ? (
