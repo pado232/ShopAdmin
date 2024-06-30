@@ -46,19 +46,18 @@ const Login = ({ onLogin }) => {
 
     axiosInstance
       .post("/adminLogin", {
-        // axiosInstance 사용
         loginId: state.id,
         loginPassword: state.pw,
       })
       .then((response) => {
         const adminId = response.data.adminId;
-        const AuthorizationToken = response.headers.get("Authorization");
-        const RefreshToken = response.headers.get("Refresh_Token");
+        const AuthorizationToken = response.headers.get("Access");
+        const RefreshToken = response.headers.get("Refresh");
 
         // 토큰을 쿠키에 저장
         setCookie("adminId", adminId);
-        setCookie("Authorization", AuthorizationToken);
-        setCookie("Refresh_Token", RefreshToken);
+        setCookie("adminAccess", AuthorizationToken);
+        setCookie("adminRefresh", RefreshToken);
 
         // 로그인 성공 시 부모 컴포넌트로 토큰 전달
         onLogin(AuthorizationToken, RefreshToken);

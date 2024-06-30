@@ -33,6 +33,7 @@ const AddNewProduct = () => {
   const handleChangeState = (e) => {
     const { name, value } = e.target;
 
+    // 숫자 이외의 값 입력 방지
     if (
       (name === "price" ||
         name === "discountRate" ||
@@ -43,8 +44,18 @@ const AddNewProduct = () => {
       return;
     }
 
+    // 할인율 값이 100 이상인 경우 100으로 설정
+    let adjustedValue = value;
+    if (name === "discountRate") {
+      if (parseInt(value) > 100) {
+        adjustedValue = "100";
+      } else if (parseInt(value) < 0) {
+        adjustedValue = "0";
+      }
+    }
+
     // 모든 숫자를 지우면 해당 필드에 0 표시
-    if (value.trim() === "") {
+    if (adjustedValue.trim() === "") {
       setItem((prevState) => ({
         ...prevState,
         [name]:
@@ -53,8 +64,11 @@ const AddNewProduct = () => {
           name === "stock" ||
           name === "sellPrice"
             ? "0"
-            : prevState.value,
-        discountRate: name === "price" ? "0" : prevState.discountRate,
+            : prevState[name],
+        discountRate:
+          name === "price" || name === "discountRate"
+            ? "0"
+            : prevState.discountRate,
         discountPrice: name === "price" ? "0" : prevState.discountPrice,
         sellPrice: name === "price" ? "0" : prevState.sellPrice,
       }));
@@ -62,7 +76,7 @@ const AddNewProduct = () => {
     }
 
     // 0으로 시작하는 숫자 입력 방지
-    if (value[0] === "0") {
+    if (adjustedValue[0] === "0" && adjustedValue.length > 1) {
       setItem((prevState) => ({
         ...prevState,
         [name]:
@@ -70,23 +84,21 @@ const AddNewProduct = () => {
           name === "discountRate" ||
           name === "stock" ||
           name === "sellPrice"
-            ? value.slice(1)
-            : prevState.value,
+            ? adjustedValue.slice(1)
+            : prevState[name],
       }));
       return;
     }
 
-    setItem((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-
+    // 상태 업데이트
     setItem((prevState) => {
-      let updatedState = { ...prevState, [name]: value };
+      let updatedState = { ...prevState, [name]: adjustedValue };
       if (name === "discountRate" || name === "price") {
-        const price = parseFloat(name === "price" ? value : prevState.price);
+        const price = parseFloat(
+          name === "price" ? adjustedValue : prevState.price
+        );
         const discountRate = parseFloat(
-          name === "discountRate" ? value : prevState.discountRate
+          name === "discountRate" ? adjustedValue : prevState.discountRate
         );
         const discountPrice = price * (discountRate / 100);
         updatedState = {
@@ -247,7 +259,6 @@ const AddNewProduct = () => {
                 <input
                   name="discountRate"
                   value={item.discountRate}
-                  ref={(el) => (inputRef.current[2] = el)}
                   onChange={handleChangeState}
                 />
                 <p style={{ textAlign: "start" }}>
@@ -264,7 +275,7 @@ const AddNewProduct = () => {
                 <input
                   name="stock"
                   value={item.stock}
-                  ref={(el) => (inputRef.current[3] = el)}
+                  ref={(el) => (inputRef.current[2] = el)}
                   onChange={handleChangeState}
                 />
               </td>
@@ -275,7 +286,7 @@ const AddNewProduct = () => {
                 <textarea
                   name="content"
                   value={item.content}
-                  ref={(el) => (inputRef.current[4] = el)}
+                  ref={(el) => (inputRef.current[3] = el)}
                   onChange={handleChangeState}
                 />
               </td>

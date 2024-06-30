@@ -8,9 +8,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = getCookie("Authorization");
+    const token = getCookie("adminAccess");
     if (token) {
-      config.headers.Authorization = `${token}`;
+      config.headers.Access = `${token}`;
     }
     return config;
   },
@@ -35,7 +35,7 @@ axiosInstance.interceptors.response.use(
       try {
         // 재발급 요청을 보내기 전에 이전 토큰과 리프레시 토큰을 가져옴
         // const oldAuthorization = getCookie("Authorization");
-        const oldRefreshToken = getCookie("Refresh_Token");
+        const oldRefreshToken = getCookie("adminRefresh");
 
         const res = await axiosInstance.post(
           "/admin/reissue/accessToken",
@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
             headers: {
               "Content-Type": "application/json",
               // Authorization: `${oldAuthorization}`,
-              Refresh_Token: `${oldRefreshToken}`,
+              Refresh: `${oldRefreshToken}`,
             },
           }
         );
@@ -53,13 +53,13 @@ axiosInstance.interceptors.response.use(
 
         // 새로운 토큰 및 만료 시간 저장
 
-        const AuthorizationToken = res.headers.get("Authorization");
-        const RefreshToken = res.headers.get("Refresh_Token");
+        const AuthorizationToken = res.headers.get("Access");
+        const RefreshToken = res.headers.get("Refresh");
 
-        setCookie("Authorization", AuthorizationToken);
-        setCookie("Refresh_Token", RefreshToken);
+        setCookie("adminAccess", AuthorizationToken);
+        setCookie("adminRefresh", RefreshToken);
 
-        error.config.headers.Authorization = `${AuthorizationToken}`;
+        error.config.headers.Access = `${AuthorizationToken}`;
         return axiosInstance(error.config);
       } catch (error) {
         console.error("재발급 실패", error);
