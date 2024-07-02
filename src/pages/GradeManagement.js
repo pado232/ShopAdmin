@@ -70,7 +70,16 @@ const GradeManagement = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          window.alert("연 구매 금액이 0인 값은 추가할 수 없습니다.");
+          if (
+            error.response.data ===
+            "이미 존재하는 등급 기준 금액입니다. 다른 등급 기준 금액을 사용해주세요"
+          ) {
+            window.alert(
+              "이미 존재하는 등급 기준 금액입니다. 다른 등급 기준 금액을 사용해주세요."
+            );
+          } else {
+            window.alert("연 구매 금액이 0인 값은 추가할 수 없습니다.");
+          }
         } else {
           window.alert("새 등급 추가 도중 오류가 발생했습니다.");
         }

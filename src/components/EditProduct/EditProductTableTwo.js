@@ -13,6 +13,7 @@ const EditProductTableTwo = () => {
     main_img: [],
     sub_img: [],
   });
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   const fetchItemDetails = useCallback(async () => {
     try {
@@ -45,12 +46,12 @@ const EditProductTableTwo = () => {
         formData.append("imgFile", file);
         formData.append("number", index);
 
-        // axiosInstance.post가 FormData를 처리할 수 있도록 설정되어 있는지 확인하세요
         const response = await axiosInstance.patch(
           "/admin/item/mainImg/add",
           formData
         );
 
+        setFileInputKey(Date.now()); // 파일 입력 요소 리셋
         fetchItemDetails();
         console.log("이미지 업로드 응답:", response.data);
       } catch (error) {
@@ -70,12 +71,12 @@ const EditProductTableTwo = () => {
         formData.append("imgFile", file);
         formData.append("number", index);
 
-        // axiosInstance.post가 FormData를 처리할 수 있도록 설정되어 있는지 확인하세요
         const response = await axiosInstance.patch(
           "/admin/item/subImg/add",
           formData
         );
 
+        setFileInputKey(Date.now()); // 파일 입력 요소 리셋
         fetchItemDetails();
         console.log("이미지 업로드 응답:", response.data);
       } catch (error) {
@@ -96,19 +97,17 @@ const EditProductTableTwo = () => {
         formData.append("imgFile", file);
         formData.append("s3FileId", s3FileId);
 
-        // axiosInstance.post가 FormData를 처리할 수 있도록 설정되어 있는지 확인하세요
         const response = await axiosInstance.patch(
           "/admin/item/mainImg/replace",
           formData
         );
-        // 응답에 필요한 데이터가 있는 경우 처리하세요
         console.log("이미지 교체 응답:", response.data);
+
+        setFileInputKey(Date.now()); // 파일 입력 요소 리셋
+        fetchItemDetails();
       } catch (error) {
         console.error("이미지 교체 오류:", error);
       }
-
-      // 이미지 업로드 후에 상태를 업데이트하거나 필요한 작업을 수행할 수 있습니다
-      fetchItemDetails();
     }
   };
 
@@ -124,19 +123,17 @@ const EditProductTableTwo = () => {
         formData.append("imgFile", file);
         formData.append("s3FileId", s3FileId);
 
-        // axiosInstance.post가 FormData를 처리할 수 있도록 설정되어 있는지 확인하세요
         const response = await axiosInstance.patch(
           "/admin/item/subImg/replace",
           formData
         );
-        // 응답에 필요한 데이터가 있는 경우 처리하세요
         console.log("이미지 교체 응답:", response.data);
+
+        setFileInputKey(Date.now()); // 파일 입력 요소 리셋
+        fetchItemDetails();
       } catch (error) {
         console.error("이미지 교체 오류:", error);
       }
-
-      // 이미지 업로드 후에 상태를 업데이트하거나 필요한 작업을 수행할 수 있습니다
-      fetchItemDetails();
     }
   };
 
@@ -193,6 +190,7 @@ const EditProductTableTwo = () => {
                         <label>
                           이미지 추가하기
                           <input
+                            key={fileInputKey}
                             type="file"
                             accept="image/*"
                             onChange={handleMainImageUpload(0)}
@@ -238,6 +236,7 @@ const EditProductTableTwo = () => {
                             <label>
                               {`추가`}
                               <input
+                                key={fileInputKey}
                                 type="file"
                                 accept="image/*"
                                 onChange={handleMainImageUpload(index + 1)}
@@ -250,6 +249,7 @@ const EditProductTableTwo = () => {
                           <label>
                             {`교체`}
                             <input
+                              key={fileInputKey}
                               type="file"
                               accept="image/*"
                               onChange={handleMainImageExchange(index)}
@@ -277,6 +277,7 @@ const EditProductTableTwo = () => {
                           ? "이미지 추가하기"
                           : "앞에 추가"}
                         <input
+                          key={fileInputKey}
                           type="file"
                           accept="image/*"
                           onChange={handleSubImageUpload(0)}
@@ -305,6 +306,7 @@ const EditProductTableTwo = () => {
                           <label>
                             {`교체`}
                             <input
+                              key={fileInputKey}
                               type="file"
                               accept="image/*"
                               onChange={handleSubImageExchange(index)}
@@ -315,6 +317,7 @@ const EditProductTableTwo = () => {
                           <label>
                             {`뒤에 추가`}
                             <input
+                              key={fileInputKey}
                               type="file"
                               accept="image/*"
                               onChange={handleSubImageUpload(index + 1)}
@@ -325,22 +328,6 @@ const EditProductTableTwo = () => {
                     </div>
                   ))}
                 </div>
-
-                {/* 
-                ❌이미지 순서교체 미완❌
-                <div className="sub_images">
-                  {mainImages.sub_img.map((imgData, index) => (
-                    <div className="sub_part" key={imgData.fileUrl}>
-                      <div style={{ width: 100, height: 100 }}>
-                        <img
-                          key={index}
-                          src={imgData.fileUrl}
-                          alt={`이미지 ${index}`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div> */}
               </td>
             </tr>
           </tbody>

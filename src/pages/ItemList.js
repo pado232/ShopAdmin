@@ -106,7 +106,7 @@ const ItemList = () => {
 
           <div className="select_delete">
             <select
-              name="delete"
+              name="sell"
               value={isSell}
               onChange={(e) => {
                 setIsSell(e.target.value);
@@ -114,7 +114,7 @@ const ItemList = () => {
               }}
             >
               <option value={true}>진열 상품</option>
-              <option value={false}>삭제 상품</option>
+              <option value={false}>진열 대기 상품</option>
             </select>
           </div>
 

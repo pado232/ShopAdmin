@@ -4,6 +4,7 @@ import MyButton from "../MyButton";
 
 const ImgAddMain = ({ onImageSelect, imgTitle, initialImage }) => {
   const [imageURL, setImageURL] = useState("");
+  const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   useEffect(() => {
     if (initialImage) {
@@ -28,6 +29,7 @@ const ImgAddMain = ({ onImageSelect, imgTitle, initialImage }) => {
   const handleDeleteImage = () => {
     setImageURL("");
     onImageSelect(""); // 이미지가 삭제되었음을 부모 컴포넌트에 알림
+    setFileInputKey(Date.now()); // 파일 입력 요소 리셋
 
     // 이미지가 삭제되면 서버에서도 삭제
     // deleteImageFromServer();
@@ -40,6 +42,7 @@ const ImgAddMain = ({ onImageSelect, imgTitle, initialImage }) => {
           <label>
             이미지 선택
             <input
+              key={fileInputKey}
               type="file"
               accept="image/*"
               onChange={handleFileInputChange}

@@ -20,6 +20,7 @@ const MemberManagement = () => {
   const [isDelete, setIsDelete] = useState("");
   const [memberSort, setMemberSort] = useState("");
   const [gradeId, setGradeId] = useState("");
+  const [gradeList, setGradeList] = useState([]);
 
   const fetchMemberList = () => {
     const queryParams = new URLSearchParams({
@@ -46,6 +47,23 @@ const MemberManagement = () => {
   useEffect(() => {
     fetchMemberList();
   }, [nowPage, isDelete, memberSort, gradeId]);
+
+  const fetchGradeList = () => {
+    axiosInstance
+      .get(`/admin/gradeList`)
+      .then((response) => {
+        const data = response.data;
+        setGradeList(data);
+
+        console.log("fetchGradeList GET ", response);
+      })
+      .catch((error) => {
+        console.error("fetchGradeList GET Error:", error);
+      });
+  };
+  useEffect(() => {
+    fetchGradeList();
+  }, []);
 
   const handleSearchSubmit = () => {
     console.log("아이디:", loginId);
@@ -106,11 +124,12 @@ const MemberManagement = () => {
               }}
             >
               <option value={""}>등급 전체</option>
-              <option value={"5"}>VVIP</option>
-              <option value={"4"}>VIP</option>
-              <option value={"3"}>GOLD</option>
-              <option value={"2"}>SILVER</option>
-              <option value={"1"}>BRONZE</option>
+
+              {gradeList.map((grade, index) => (
+                <option key={index} value={grade.gradeId}>
+                  {grade.gradeName}
+                </option>
+              ))}
             </select>
           </div>
 

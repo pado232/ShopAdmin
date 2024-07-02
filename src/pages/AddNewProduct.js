@@ -14,8 +14,6 @@ import ImgAddRegisteration from "../components/imgCreate/ImgAddRegisteration";
 const AddNewProduct = () => {
   const inputRef = useRef([]);
   const selectRef = useRef([]);
-  // const [sellPrice, setSellPrice] = useState(0);
-  // const [salePrice, setSalePrice] = useState(0);
   const [item, setItem] = useState({
     category: "",
     subcategory: "",
@@ -39,7 +37,7 @@ const AddNewProduct = () => {
         name === "discountRate" ||
         name === "stock" ||
         name === "sellPrice") &&
-      !/^\d*$/.test(value)
+      !/^\d*$/.test(value) // 숫자만 입력되도록 함
     ) {
       return;
     }
@@ -56,38 +54,12 @@ const AddNewProduct = () => {
 
     // 모든 숫자를 지우면 해당 필드에 0 표시
     if (adjustedValue.trim() === "") {
-      setItem((prevState) => ({
-        ...prevState,
-        [name]:
-          name === "price" ||
-          name === "discountRate" ||
-          name === "stock" ||
-          name === "sellPrice"
-            ? "0"
-            : prevState[name],
-        discountRate:
-          name === "price" || name === "discountRate"
-            ? "0"
-            : prevState.discountRate,
-        discountPrice: name === "price" ? "0" : prevState.discountPrice,
-        sellPrice: name === "price" ? "0" : prevState.sellPrice,
-      }));
-      return;
+      adjustedValue = "0"; // 숫자 필드가 공백인 경우 0으로 설정
     }
 
     // 0으로 시작하는 숫자 입력 방지
     if (adjustedValue[0] === "0" && adjustedValue.length > 1) {
-      setItem((prevState) => ({
-        ...prevState,
-        [name]:
-          name === "price" ||
-          name === "discountRate" ||
-          name === "stock" ||
-          name === "sellPrice"
-            ? adjustedValue.slice(1)
-            : prevState[name],
-      }));
-      return;
+      adjustedValue = adjustedValue.slice(1); // 선행 0 제거
     }
 
     // 상태 업데이트
@@ -177,6 +149,7 @@ const AddNewProduct = () => {
     for (let i = 0; i < item.sub_img.length; i++) {
       formData.append("subImgList", item.sub_img[i]);
     }
+    console.log("item", item);
 
     axiosInstance
       .post("/admin/item", formData)
@@ -194,6 +167,7 @@ const AddNewProduct = () => {
           window.location.reload();
         } else {
           console.error("Error:", error);
+          window.alert("상품 등록에 실패했습니다. 다시 시도하세요."); // 오류 발생 시 에러 메시지 추가
         }
       });
   };

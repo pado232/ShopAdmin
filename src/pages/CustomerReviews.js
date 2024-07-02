@@ -22,6 +22,7 @@ const CustomerReviews = () => {
 
   const fetchReviewsList = () => {
     const modiItemId = itemId === undefined ? "" : itemId;
+    //itemId=${modiItemId}
     axiosInstance
       .get(
         `/admin/reviewList/view?itemId=${modiItemId}&star=${stars}&nowPage=${nowPage}`
