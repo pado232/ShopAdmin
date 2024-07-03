@@ -62,7 +62,7 @@ const CategorySetting = () => {
 
   const fetchCategoriesRemove = (categoryId) => {
     axiosInstance
-      .delete(`/admin/category/${categoryId}`)
+      .delete(`/admin/category?categoryId=${categoryId}`)
       .then((response) => {
         console.log("Remove DELETE", response);
         fetchCategories(); // Refresh categories after deleting

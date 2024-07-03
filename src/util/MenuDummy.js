@@ -88,7 +88,7 @@ export const MenuDummy = [
         component: Announcement,
       },
       {
-        title: "웹사이트 콘텐츠 관리 - 배너, 푸터, 메뉴 등",
+        title: "카테고리 및 쇼핑몰 이미지 관리",
         url: "/sitecontent",
         component: SiteContentsManagement,
       },
