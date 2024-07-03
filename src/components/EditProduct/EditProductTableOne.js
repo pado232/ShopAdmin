@@ -83,70 +83,34 @@ const EditProductTableOne = () => {
       return;
     }
 
-    // 모든 숫자를 지우면 해당 필드에 0 표시
-    if (value.trim() === "") {
-      setInputValue((prevState) => ({
-        ...prevState,
-        [name]:
-          name === "price" ||
-          name === "discountRate" ||
-          name === "stock" ||
-          name === "sellPrice"
-            ? "0"
-            : prevState.value,
+    // 할인율 값이 100 이상인 경우 100으로 설정
+    let adjustedValue = value;
+    if (name === "discountRate") {
+      if (parseInt(value) > 100) {
+        adjustedValue = "100";
+      } else if (parseInt(value) < 0) {
+        adjustedValue = "0";
+      }
+    }
 
-        discountRate: name === "price" ? "0" : prevState.discountRate,
-        discountPrice: name === "price" ? "0" : prevState.discountPrice,
-        sellPrice: name === "price" ? "0" : prevState.sellPrice,
-      }));
-      return;
+    // 모든 숫자를 지우면 해당 필드에 0 표시
+    if (adjustedValue.trim() === "" && name !== "name" && name !== "content") {
+      adjustedValue = "0"; // 숫자 필드가 공백인 경우 0으로 설정
     }
 
     // 0으로 시작하는 숫자 입력 방지
-    if (value[0] === "0") {
-      setInputValue((prevState) => ({
-        ...prevState,
-        [name]:
-          name === "price" ||
-          name === "discountRate" ||
-          name === "stock" ||
-          name === "sellPrice"
-            ? value.slice(1)
-            : prevState.value,
-      }));
-      return;
+    if (adjustedValue[0] === "0" && adjustedValue.length > 1) {
+      adjustedValue = adjustedValue.slice(1); // 선행 0 제거
     }
 
-    setInputValue((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-
-    // 0으로 시작하지 않는 경우에만 값 설정
-
-    // if (name === "discountRate") {
-    //   const price = parseFloat(inputValue.price);
-    //   const discountRate = parseFloat(value);
-    //   const discountPrice = price * (discountRate / 100);
-    //   setInputValue({
-    //     ...inputValue,
-    //     [name]: value,
-    //     discountPrice: Math.floor(discountPrice), // 할인가를 내림하여 표시
-    //     sellPrice: Math.floor(price - discountPrice), // 할인가를 원가에서 빼고 내림하여 할인가 계산
-    //   });
-    // } else {
-    //   setInputValue({
-    //     ...inputValue,
-    //     [name]: value,
-    //   });
-    // }
-
     setInputValue((prevState) => {
-      let updatedState = { ...prevState, [name]: value };
+      let updatedState = { ...prevState, [name]: adjustedValue };
       if (name === "discountRate" || name === "price") {
-        const price = parseFloat(name === "price" ? value : prevState.price);
+        const price = parseFloat(
+          name === "price" ? adjustedValue : prevState.price
+        );
         const discountRate = parseFloat(
-          name === "discountRate" ? value : prevState.discountRate
+          name === "discountRate" ? adjustedValue : prevState.discountRate
         );
         const discountPrice = price * (discountRate / 100);
         updatedState = {

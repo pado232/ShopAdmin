@@ -18,7 +18,7 @@ const MyPage = () => {
 
   const fetchMyInfo = () => {
     axiosInstance
-      .get(`/admin/${getCookie("Id")}/myPage/view`)
+      .get(`/admin/${getCookie("adminId")}/myPage/view`)
       .then((res) => {
         const myInfoData = res.data;
 

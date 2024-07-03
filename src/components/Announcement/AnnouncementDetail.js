@@ -40,7 +40,7 @@ const AnnouncementDetail = () => {
       axiosInstance
         .delete(
           `/admin/${getCookie(
-            "Id"
+            "adminId"
           )}/announcement?announcementId=${announcementId}`
         )
         .then((res) => {

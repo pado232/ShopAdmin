@@ -124,7 +124,6 @@ const MemberManagement = () => {
               }}
             >
               <option value={""}>등급 전체</option>
-
               {gradeList.map((grade, index) => (
                 <option key={index} value={grade.gradeId}>
                   {grade.gradeName}

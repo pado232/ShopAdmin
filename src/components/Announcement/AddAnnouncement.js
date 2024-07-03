@@ -38,7 +38,7 @@ const AddAnnouncement = () => {
     }
 
     axiosInstance
-      .post(`/admin/${getCookie("Id")}/announcement`, {
+      .post(`/admin/${getCookie("adminId")}/announcement`, {
         title: newAnnouncement.title,
         content: newAnnouncement.content,
         fix: fixToggle,

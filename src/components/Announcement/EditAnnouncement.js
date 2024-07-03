@@ -26,7 +26,7 @@ const EditAnnouncement = () => {
     axiosInstance
       .get(
         `/admin/${getCookie(
-          "Id"
+          "adminId"
         )}/announcement/data?announcementId=${announcementId}`
       )
       .then((res) => {
@@ -65,7 +65,7 @@ const EditAnnouncement = () => {
     // 각 항목 유효성 검사
 
     axiosInstance
-      .patch(`/admin/${getCookie("Id")}/announcement`, {
+      .patch(`/admin/${getCookie("adminId")}/announcement`, {
         announcementId: announcementId,
         title: announcement.title,
         content: announcement.content,

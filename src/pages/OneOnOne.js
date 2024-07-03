@@ -48,7 +48,7 @@ const OneOnOne = () => {
 
   const fetchOneOnOneEdit = (id) => {
     axiosInstance
-      .get(`/admin/${getCookie("Id")}/comment?commentId=${id}`)
+      .get(`/admin/${getCookie("adminId")}/comment?commentId=${id}`)
       .then((response) => {
         const data = response.data;
         const commentIdData = data.commentId;
@@ -88,7 +88,7 @@ const OneOnOne = () => {
 
   const handleEditSubmit = () => {
     axiosInstance
-      .patch(`/admin/${getCookie("Id")}/comment`, {
+      .patch(`/admin/${getCookie("adminId")}/comment`, {
         commentId: commentId,
         content: content,
       })
@@ -105,7 +105,7 @@ const OneOnOne = () => {
 
   const handleDelete = (id) => {
     axiosInstance
-      .delete(`/admin/${getCookie("Id")}/comment?commentId=${id}`)
+      .delete(`/admin/${getCookie("adminId")}/comment?commentId=${id}`)
       .then((response) => {
         fetchOneOnOneList();
         console.log("comment DELETE ", response);
@@ -131,7 +131,7 @@ const OneOnOne = () => {
   const handleCreateSubmit = (oneOnOneId) => {
     console.log("oneOnOneId", oneOnOneId);
     axiosInstance
-      .post(`/admin/${getCookie("Id")}/comment`, {
+      .post(`/admin/${getCookie("adminId")}/comment`, {
         oneOnOneId: oneOnOneId,
         content: addContent,
       })

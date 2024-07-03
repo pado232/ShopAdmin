@@ -53,7 +53,7 @@ const AddNewProduct = () => {
     }
 
     // 모든 숫자를 지우면 해당 필드에 0 표시
-    if (adjustedValue.trim() === "") {
+    if (adjustedValue.trim() === "" && name !== "name" && name !== "content") {
       adjustedValue = "0"; // 숫자 필드가 공백인 경우 0으로 설정
     }
 

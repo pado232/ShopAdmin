@@ -54,7 +54,7 @@ const QAndA = () => {
 
   const fetchQAndAEdit = (id) => {
     axiosInstance
-      .get(`/admin/${getCookie("Id")}/QAComment/data?qaCommentId=${id}`)
+      .get(`/admin/${getCookie("adminId")}/QAComment/data?qaCommentId=${id}`)
       .then((response) => {
         const data = response.data;
         const setQaCommentIdData = data.qaCommentId;
@@ -94,7 +94,7 @@ const QAndA = () => {
 
   const handleEditSubmit = () => {
     axiosInstance
-      .patch(`/admin/${getCookie("Id")}/QAComment`, {
+      .patch(`/admin/${getCookie("adminId")}/QAComment`, {
         qaCommentId: qaCommentId,
         content: content,
       })
@@ -117,7 +117,7 @@ const QAndA = () => {
 
   const handleDelete = (id) => {
     axiosInstance
-      .delete(`/admin/${getCookie("Id")}/QAComment?qaCommentId=${id}`)
+      .delete(`/admin/${getCookie("adminId")}/QAComment?qaCommentId=${id}`)
       .then((response) => {
         fetchQAndAList();
         console.log("QAComment DELETE ", response);
@@ -142,7 +142,7 @@ const QAndA = () => {
 
   const handleCreateSubmit = (itemQAId) => {
     axiosInstance
-      .post(`/admin/${getCookie("Id")}/QAComment`, {
+      .post(`/admin/${getCookie("adminId")}/QAComment`, {
         itemQAId: itemQAId,
         content: addContent,
       })
