@@ -38,3 +38,14 @@ th {
   margin: 20px 50px;
   text-align: end;
 }
+.AddNewProduct .sell_text {
+  color: red;
+  font-weight: bold;
+
+  padding: 0 30px;
+}
+.AddNewProduct .sell {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

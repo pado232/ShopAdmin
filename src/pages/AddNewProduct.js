@@ -24,6 +24,7 @@ const AddNewProduct = () => {
     sellPrice: "0",
     price: "0",
     stock: "0",
+    sell: false,
     main_img: [""],
     sub_img: [""],
   });
@@ -140,7 +141,7 @@ const AddNewProduct = () => {
     formData.append("discountPrice", item.discountPrice);
     formData.append("sellPrice", item.sellPrice);
     formData.append("stock", item.stock);
-    formData.append("isSell", false);
+    formData.append("sell", item.sell);
 
     // mainImg와 serveImg에 대한 FormData를 추가
     for (let i = 0; i < item.main_img.length; i++) {
@@ -157,7 +158,7 @@ const AddNewProduct = () => {
         console.log("POST Success:", response.data);
 
         window.alert("상품이 성공적으로 등록되었습니다!");
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         if (error.response?.data?.message === "NOT_AUTHORIZATION") {
@@ -193,6 +194,30 @@ const AddNewProduct = () => {
                 <p style={{ fontSize: 14 }}>
                   선택하지 않은 이미지는 그 다음 이미지로 순차 저장됩니다.
                 </p>
+              </td>
+            </tr>
+            <tr>
+              <th>상품 진열 여부</th>
+              <td style={{ textAlign: "start" }}>
+                <div className="sell">
+                  {item.sell ? (
+                    <div className="sell_text">진열</div>
+                  ) : (
+                    <div className="sell_text" style={{ color: "#aaa" }}>
+                      미진열
+                    </div>
+                  )}
+
+                  <MyButton
+                    buttonText={"변경"}
+                    onClick={() => {
+                      setItem((prevState) => ({
+                        ...prevState,
+                        sell: !prevState.sell,
+                      }));
+                    }}
+                  />
+                </div>
               </td>
             </tr>
             <tr>
