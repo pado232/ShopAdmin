@@ -139,6 +139,20 @@ const GradeManagement = () => {
   const valueStateChange = (e) => {
     const { name, value } = e.target;
 
+    if (name === "rewardRate") {
+      if (!/^\d*$/.test(value)) {
+        return;
+      }
+      const numericValue = parseInt(value, 10);
+      if (numericValue > 100) {
+        setTempGrade((prevAddGrade) => ({
+          ...prevAddGrade,
+          [name]: "100",
+        }));
+        return;
+      }
+    }
+
     setTempGrade({
       ...tempGrade,
       [name]: value,
@@ -148,20 +162,35 @@ const GradeManagement = () => {
   const addValueStateChange = (e) => {
     const { name, value } = e.target;
 
+    // newRewardRate는 숫자만 허용하고, 0에서 100 사이의 값만 허용
+    if (name === "newRewardRate") {
+      if (!/^\d*$/.test(value)) {
+        return;
+      }
+      const numericValue = parseInt(value, 10);
+      if (numericValue > 100) {
+        setAddGrade((prevAddGrade) => ({
+          ...prevAddGrade,
+          [name]: "100",
+        }));
+        return;
+      }
+    }
+
     if (name === "newGradePrice") {
       const formattedValue = value
         .replace(/\D/g, "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-      setAddGrade({
-        ...addGrade,
+      setAddGrade((prevAddGrade) => ({
+        ...prevAddGrade,
         [name]: formattedValue,
-      });
+      }));
     } else {
-      setAddGrade({
-        ...addGrade,
+      setAddGrade((prevAddGrade) => ({
+        ...prevAddGrade,
         [name]: value,
-      });
+      }));
     }
   };
 
@@ -184,7 +213,7 @@ const GradeManagement = () => {
                 <th></th>
                 <th>등급명</th>
                 <th>등급별 연 구매금액</th>
-                <th>등급별 할인률</th>
+                <th>등급별 적립률</th>
                 <th>수정하기</th>
               </tr>
             </thead>
@@ -218,12 +247,13 @@ const GradeManagement = () => {
                 <td>
                   <div>
                     <input
-                      type="number"
+                      type="text"
                       placeholder="할인률 입력"
                       name="newRewardRate"
                       value={addGrade.newRewardRate}
                       onChange={addValueStateChange}
-                    />
+                    />{" "}
+                    %
                   </div>
                 </td>
                 <td>
@@ -255,7 +285,7 @@ const GradeManagement = () => {
                 <th>등급아이디</th>
                 <th>등급명</th>
                 <th>등급별 연 구매금액</th>
-                <th>등급별 할인률</th>
+                <th>등급별 적립률</th>
                 <th>수정하기</th>
               </tr>
             </thead>
@@ -281,7 +311,7 @@ const GradeManagement = () => {
                     {editingIndex === index ? (
                       <div>
                         <input
-                          type="number"
+                          type="text"
                           name="rewardRate"
                           value={tempGrade.rewardRate}
                           onChange={valueStateChange}

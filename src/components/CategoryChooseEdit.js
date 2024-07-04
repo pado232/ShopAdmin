@@ -37,7 +37,7 @@ const CategoryChooseEdit = ({ item, setItem }) => {
   return (
     <div className="CategoryChoose">
       <div>
-        <div style={{ padding: 5, fontSize: 16 }}>{categoryName}hh</div>
+        <div style={{ padding: 5, fontSize: 16 }}>{categoryName}</div>
       </div>
     </div>
   );

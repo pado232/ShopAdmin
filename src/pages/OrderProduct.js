@@ -104,26 +104,45 @@ const OrderProduct = () => {
               <tr>
                 <th>주문 상태</th>
                 <td>
-                  {order.status === "결제취소" ? (
-                    <div>
-                      <div style={{ padding: 10 }}>{order.status}</div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div style={{ padding: 10 }}>{order.status}</div>
-                      <div>
-                        <EditOrderStatus
-                          orderStatus={order.status}
-                          orderId={order.orderId}
-                          onStatusChange={handleStatusChange}
-                        />
-                      </div>
+                  <div style={{ padding: 10 }}>{order.status}</div>
+                  {order?.reasonText && (
+                    <div className="cancel_reason">
+                      <strong>{order.status} 사유 : </strong>{" "}
+                      {order?.reasonText}
                     </div>
                   )}
+
+                  {/* <div className="cancel_reason">
+                    {order.status} 사유 : {order?.reasonText}
+                  </div> */}
+
+                  {order.status === "결제취소" ||
+                  order.status === "환불완료" ||
+                  order.status === "구매확정" ? (
+                    ""
+                  ) : (
+                    <div>
+                      <EditOrderStatus
+                        orderStatus={order.status}
+                        orderId={order.orderId}
+                        onStatusChange={handleStatusChange}
+                        costomerReasonText={order.reasonText}
+                      />
+                    </div>
+                  )}
+                  {/* <div style={{ padding: 10 }}>{order.status}</div>
+                  <div>
+                    <EditOrderStatus
+                      orderStatus={order.status}
+                      orderId={order.orderId}
+                      onStatusChange={handleStatusChange}
+                    />
+                  </div> */}
                 </td>
               </tr>
               <tr>
                 <th>주문 고유 번호</th>
+
                 <td>{order.merchantUid}</td>
               </tr>
               <tr>

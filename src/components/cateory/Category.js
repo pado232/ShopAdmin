@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axiosInstance from "../../api/AxiosInstance.js";
 import "../../styles/Category.css";
 
-const CategorySetting = () => {
+const Category = () => {
   const [getData, setGetData] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   const [categoryName, setCategoryName] = useState("");
@@ -271,4 +271,4 @@ const CategorySetting = () => {
   );
 };
 
-export default CategorySetting;
+export default Category;

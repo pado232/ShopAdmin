@@ -24,14 +24,28 @@ const OrderList = () => {
   const [merchantUid, setMerchantUid] = useState(""); // 주문 고유번호
 
   const [selectedDuration, setSelectedDuration] = useState("36");
-  const [startDate, setStartDate] = useState(
-    new Date(new Date().setFullYear(new Date().getFullYear() - 3))
-      .toISOString()
-      .split("T")[0]
-  ); // 기간별 주문 검색을 위한 시작점과 끝점
-  const [lastDate, setLastDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+
+  // 대한민국 시간대로 날짜를 맞추는 함수
+  const getKoreaDate = (date) => {
+    // 대한민국의 시간대 오프셋 (UTC+9)
+    const KOREA_OFFSET = 9 * 60 * 60 * 1000;
+    return new Date(date.getTime() + KOREA_OFFSET);
+  };
+
+  const [startDate, setStartDate] = useState(() => {
+    const currentDate = new Date();
+    const threeYearsAgo = new Date(
+      currentDate.setFullYear(currentDate.getFullYear() - 3)
+    );
+    const koreaDate = getKoreaDate(threeYearsAgo);
+    return koreaDate.toISOString().split("T")[0];
+  });
+
+  const [lastDate, setLastDate] = useState(() => {
+    const koreaDate = getKoreaDate(new Date());
+    return koreaDate.toISOString().split("T")[0];
+  });
+
   const [status, setStatus] = useState("");
 
   const fetchOrderList = () => {
@@ -66,8 +80,10 @@ const OrderList = () => {
         console.error("orderList GET Error:", error);
       });
   };
+
   useEffect(() => {
     fetchOrderList();
+    console.log(status);
   }, [status, nowPage, startDate]);
 
   const durationOptions = [
@@ -82,47 +98,41 @@ const OrderList = () => {
     const duration = e.target.value;
     setSelectedDuration(duration);
 
-    // 시작 날짜를 오늘로 설정
+    // 끝 날짜를 오늘로 설정
     const today = new Date();
-    setLastDate(today.toISOString().split("T")[0]);
+    const koreaToday = getKoreaDate(today);
+    setLastDate(koreaToday.toISOString().split("T")[0]);
 
-    // 끝 날짜를 계산
-    const lastDate = new Date(today);
-    lastDate.setMonth(lastDate.getMonth() - parseInt(duration));
-    setStartDate(lastDate.toISOString().split("T")[0]);
+    // 시작 날짜를 계산
+    const startDate = new Date(koreaToday);
+    startDate.setMonth(startDate.getMonth() - parseInt(duration));
+    const koreaStartDate = getKoreaDate(startDate);
+    setStartDate(koreaStartDate.toISOString().split("T")[0]);
   };
 
   const handlePeriodSubmit = () => {
-    // 서버에 startDate와 endDate를 전달하면 됩니다.
     console.log("시작 날짜:", startDate);
     console.log("끝 날짜:", lastDate);
-
     fetchOrderList();
   };
 
   const handleSearchSubmit = () => {
-    // 서버에 startDate와 endDate를 전달하면 됩니다.
     console.log("상품명:", itemName);
     console.log("아이디:", loginId);
     console.log("주문 고유번호:", merchantUid);
-
     fetchOrderList();
-
     setItemName("");
     setLoginId("");
     setMerchantUid("");
   };
 
   const handleSearchCancelSubmit = () => {
-    // 서버에 startDate와 endDate를 전달하면 됩니다.
     setItemName("");
     setLoginId("");
     setMerchantUid("");
-
     console.log("상품명:", itemName);
     console.log("아이디:", loginId);
     console.log("주문 고유번호:", merchantUid);
-
     fetchOrderList();
   };
 
@@ -135,10 +145,7 @@ const OrderList = () => {
             <select
               name="status"
               value={status}
-              onChange={(e) => {
-                setStatus(e.target.value);
-                console.log(status);
-              }}
+              onChange={(e) => setStatus(e.target.value)}
             >
               <option value={""}>전체 상태</option>
               <option value={"결제준비"}>결제 준비</option>
@@ -249,13 +256,6 @@ const OrderList = () => {
                             <div>
                               [합계] : {detail.totalPrice.toLocaleString()}
                             </div>
-                            {/* <div>---------아이템 정보 ------------</div>
-                            <div>할인률:{detail.item.discountRate}</div>
-                            <div>
-                              {detail.item.discountPrice.toLocaleString()}
-                            </div>
-                            <div>{detail.item.sellPrice.toLocaleString()}</div>
-                            <div>{detail.item.sell.toLocaleString()}</div> */}
                           </div>
                         </div>
                       ))}
@@ -311,4 +311,5 @@ const OrderList = () => {
     </div>
   );
 };
+
 export default OrderList;
