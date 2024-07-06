@@ -21,6 +21,29 @@ import CheckPermissions from "./api/CheckPermissions";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const fetchHealth = () => {
+    axiosInstance
+      .get("/health")
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("health GET ", res);
+        } else {
+          console.error("Unexpected status code:", res.status);
+        }
+      })
+      .catch((error) => {
+        console.error("health GET Error:", error);
+      });
+  };
+
+  useEffect(() => {
+    fetchHealth();
+    const interval = setInterval(() => {
+      fetchHealth();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
   useEffect(() => {
     // 쿠키에서 로그인 상태 확인
     const token = getCookie("adminAccess");
