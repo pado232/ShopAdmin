@@ -4,8 +4,6 @@
 
 ### + RealMement Shopping-Mall
 
-#### [RealMement Shopping-Mall 바로가기](https://real-moment.kro.kr/)
-
 #### [Github](https://github.com/pado232/RealMoment)
 
 </br>
