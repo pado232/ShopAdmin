@@ -4,7 +4,7 @@
 
 ### + RealMement Shopping-Mall
 
-#### [Github](https://github.com/pado232/RealMoment)
+#### [RealMoment Shopping-Mall 바로가기](https://github.com/pado232/RealMoment)
 
 </br>
 
