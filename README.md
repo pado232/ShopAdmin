@@ -1,6 +1,6 @@
 # 🛒 RealMoment Shopping-Mall Admin
 
-#### [RealMement Shopping-Mall Admin 바로가기](https://real-moment.kro.kr/)
+#### [RealMement Shopping-Mall Admin 바로가기](https://real-moment-admin.kro.kr/)
 
 ### + RealMement Shopping-Mall
 
